@@ -452,7 +452,7 @@ dialog .close:hover{background:rgba(255,255,255,.15)}
   </div>
   <div class="mobilepanel" id="mpanel">
     <nav aria-label="Mobile">
-      <a href="#about">About Us</a><a href="#careers">Careers</a><a href="#contact">Contact</a><a href="#cardiology">Cardiology</a>
+      <a href="#about">About Us</a><a href="#careers">Careers</a><a href="#contact">Contact</a><a href="#cardiology">Cardiology</a><a href="#dental">Dental</a><a href="#surgery">Surgery</a><a href="#ophthalmology">Ophthalmology</a><a href="#internal-medicine">Internal Medicine</a><a href="#oncology">Oncology</a>
       <a class="btn btn-primary" href="#contact">Get in Touch</a>
     </nav>
   </div>
@@ -649,7 +649,7 @@ dialog .close:hover{background:rgba(255,255,255,.15)}
         <p class="news-note">By subscribing you agree to with our <a href="#home">Privacy Policy</a> and provide consent to receive updates from our company.</p>
       </div>
       <ul>
-        <li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#cardiology">Cardiology</a></li><li><a href="#home" data-spec="Dental">Dental</a></li><li><a href="#surgery">Surgery</a></li>
+        <li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#cardiology">Cardiology</a></li><li><a href="#dental">Dental</a></li><li><a href="#surgery">Surgery</a></li>
       </ul>
       <ul>
         <li><a href="#ophthalmology">Ophthalmology</a></li><li><a href="#oncology">Oncology</a></li><li><a href="#internal-medicine">Internal Medicine</a></li><li><a href="#contact">Contact</a></li><li><a href="#home" data-toast="Mission Pet Health opens in a new site, which isn’t part of this prototype.">Mission Pet Health</a></li>
@@ -694,7 +694,7 @@ const SPECS=[
 ];
 const NAV_ORDER=['Cardiology','Dental','Surgery','Ophthalmology','Internal Medicine','Oncology'];
 const slug=n=>n.toLowerCase().replace(/\s+/g,'-');
-const BUILT=['Cardiology','Surgery','Ophthalmology','Internal Medicine','Oncology'];
+const BUILT=['Cardiology','Dental','Surgery','Ophthalmology','Internal Medicine','Oncology'];
 const specHref=n=>BUILT.includes(n)?'#'+slug(n):'#home';
 $('#specnav').innerHTML=NAV_ORDER.map(n=>`<a href="${specHref(n)}" ${BUILT.includes(n)?`data-nav="${slug(n)}"`:`data-spec="${n}"`}>${n}</a>`).join('');
 
@@ -769,6 +769,17 @@ const PAGES=[
        ['Continuous Learning','We nurture a continuous learning culture, even for our tenured cardiologists. Along with CE, you’ll serve as an investigator in cutting-edge clinical trials, participate in mentorship, and develop leadership skills.'],
        ['Dedicated Support',SUPPORT],['Large Cardiologist Network',NETWORK],['Fulfilling Careers',FULFIL]],
   cta:'Whether you’re a board-certified cardiologist or interested in a residency in cardiology, we have opportunities for you. Just click the link below and indicate your area of interest.'},
+ {name:'Dental',heroPh:'Photo: dentist examining dog',caringPh:'Photo: vet with white dog',
+  title:'Join Our Growing Veterinary Dental Network',
+  intro:'Build the life you want as a veterinary dentist with Mission Specialty. We offer dentists the support to deliver patient care at the highest standard, along with a fulfilling life on your terms.',
+  vTitle:'A Dental Network Built and Led by Specialty Professionals',vLabel:'Dental video',
+  vSub:'At Mission Specialty, Dental and Oral Surgery is a critical area of focus, not just a service add-on in a large clinic. Our AVDC-boarded doctors work in hospitals built to deliver advanced oral surgery and care, equipped with advanced technology and support staff for dental services.',
+  who:'dentists and oral surgeons',
+  adv:[['Clinical Autonomy','You practice your way. Your diagnostics, your treatment plan, your patients, your local referral community.'],
+       ['Advanced Technology','Our imaging and technology are the best of their kind, including cone-beam CT and advanced equipment. We constantly assess new technologies and equipment, so you have the very best available.'],
+       ['Continuous Learning','We nurture a continuous learning culture, even for our tenured dentists. Along with CE, you’ll participate in mentorship and develop leadership skills.'],
+       ['Dedicated Support',SUPPORT],['Large Dental Specialist Network',NETWORK],['Fulfilling Careers',FULFIL]],
+  cta:'Whether you’re a board-certified dentist or interested in a residency in dentistry, we have opportunities for you. Just click the link below and indicate your area of interest.'},
  {name:'Surgery',heroPh:'Photo: surgeon in the OR',caringPh:'Photo: vet reviewing X-ray with cat',
   title:'Build the Life You Want as a Veterinary Surgeon',
   intro:'At Mission Specialty, our goal is simple: to build and support happy, collaborative veterinary surgery teams. Exceptional patient care is a natural result. Join our network of boarded veterinary surgeons and discover how fulfilling careers meet fulfilling lives.',
