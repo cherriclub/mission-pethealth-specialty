@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mission Specialty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ---------- Tokens (from Figma: MPH | Components) ---------- */
+:root{
+  --navy:#0c2747; --navy-2:#13294c; --navy-3:#1f3d66; --gold:#d69a2d; --gold-hi:#e4ac46;
+  --neutral:#ada29c; --n-50:#fdfcfa; --n-100:#fbf9f6; --n-200:#f7f3ed; --white:#fff;
+
+  --bg:#fbf9f6; --bg-alt:#f7f3ed; --surface:#ffffff; --heading:#0c2747; --body:#4e4a47;
+  --line:rgba(12,39,71,.16); --line-strong:#0c2747;
+  --btn-bg:#0c2747; --btn-fg:#fff; --btn-hover:#1a3d6b;
+  --ph-a:#efe8dd; --ph-b:#e4dacb; --ph-ink:rgba(12,39,71,.55); --ph-chip:rgba(255,255,255,.7);
+  --ph-pattern:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='%230c2747' fill-opacity='.05'%3E%3Cellipse cx='30' cy='36' rx='4' ry='5.5'/%3E%3Cellipse cx='40' cy='29' rx='4' ry='5.5'/%3E%3Cellipse cx='51' cy='29' rx='4' ry='5.5'/%3E%3Cellipse cx='60' cy='36' rx='4' ry='5.5'/%3E%3Cpath d='M33 52c0-7 6-12 12-12s12 5 12 12c0 4-4 5-6 4s-4-2-6-2-4 1-6 2-6 0-6-4z'/%3E%3C/g%3E%3C/svg%3E");
+  --err:#b3261e;
+
+  --font:"Figtree","Gibson","Segoe UI",system-ui,-apple-system,sans-serif;
+  --gutter:clamp(20px,5vw,64px);
+  --sec:clamp(72px,9vw,128px);
+  --r-card:6px;
+
+  --sh-xs:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);
+  --sh-sm:0 4px 8px -2px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.06);
+  --sh-md:0 12px 16px -4px rgba(0,0,0,.08),0 4px 6px -2px rgba(0,0,0,.03);
+  --sh-lg:0 20px 24px -4px rgba(0,0,0,.08),0 8px 8px -4px rgba(0,0,0,.03);
+  --sh-xl:0 24px 48px -12px rgba(0,0,0,.18);
+
+  --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0a1729; --bg-alt:#0e1e34; --surface:#132741; --heading:#f4efe7; --body:#c9c1b8;
+    --line:rgba(255,255,255,.14); --line-strong:rgba(255,255,255,.55);
+    --btn-bg:#d69a2d; --btn-fg:#0c2747; --btn-hover:#e4ac46;
+    --ph-a:#18304f; --ph-b:#122640; --ph-ink:rgba(255,255,255,.6); --ph-chip:rgba(10,23,41,.55);
+    --ph-pattern:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='%23ffffff' fill-opacity='.04'%3E%3Cellipse cx='30' cy='36' rx='4' ry='5.5'/%3E%3Cellipse cx='40' cy='29' rx='4' ry='5.5'/%3E%3Cellipse cx='51' cy='29' rx='4' ry='5.5'/%3E%3Cellipse cx='60' cy='36' rx='4' ry='5.5'/%3E%3Cpath d='M33 52c0-7 6-12 12-12s12 5 12 12c0 4-4 5-6 4s-4-2-6-2-4 1-6 2-6 0-6-4z'/%3E%3C/g%3E%3C/svg%3E");
+    --err:#ff8a80;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0a1729; --bg-alt:#0e1e34; --surface:#132741; --heading:#f4efe7; --body:#c9c1b8;
+  --line:rgba(255,255,255,.14); --line-strong:rgba(255,255,255,.55);
+  --btn-bg:#d69a2d; --btn-fg:#0c2747; --btn-hover:#e4ac46;
+  --ph-a:#18304f; --ph-b:#122640; --ph-ink:rgba(255,255,255,.6); --ph-chip:rgba(10,23,41,.55);
+  --err:#ff8a80; color-scheme:dark;
+}
+
+/* ---------- Base ---------- */
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 132px)}
+body{margin:0;background:var(--bg);color:var(--body);font:400 1rem/1.6 var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--n-50)}
+img,svg{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4,h5{color:var(--heading);margin:0;font-weight:600;line-height:1.2;text-wrap:balance}
+h1{font-size:clamp(2.25rem,4.2vw,3.25rem)}
+h2{font-size:clamp(1.875rem,3.2vw,2.5rem)}
+h3{font-size:clamp(1.375rem,2vw,1.625rem);line-height:1.3}
+h4{font-size:1.25rem;line-height:1.35}
+h5{font-size:1.0625rem;line-height:1.4}
+p{margin:0;text-wrap:pretty}
+.lead{font-size:1.125rem;line-height:1.6}
+.small{font-size:.9375rem}
+.wrap{width:min(1200px,100% - 2*var(--gutter));margin-inline:auto}
+.sec{padding-block:var(--sec)}
+.stack>*+*{margin-top:var(--s,16px)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Navy sections keep brand colors in both themes */
+.navy{background:linear-gradient(180deg,#0c2747 0%,#14315a 55%,#1f3d66 100%);color:#d9dfe8}
+.navy h1,.navy h2,.navy h3,.navy h4,.navy h5{color:#fff}
+.navy-flat{background:#0c2747;color:#d9dfe8}
+.navy-flat h2,.navy-flat h3,.navy-flat h4,.navy-flat h5{color:#fff}
+.alt{background:var(--bg-alt)}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:46px;padding:0 1.5rem;border-radius:999px;border:1px solid transparent;font:500 .9375rem/1 var(--font);text-decoration:none;cursor:pointer;position:relative;overflow:hidden;isolation:isolate;transition:background-color .25s,color .25s,border-color .25s,transform .3s var(--ease),box-shadow .3s var(--ease)}
+.btn::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);transform:translateX(-120%);transition:transform .6s var(--ease)}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--sh-sm)}
+.btn:hover::after{transform:translateX(120%)}
+.btn:active{transform:translateY(0) scale(.98);box-shadow:none}
+.btn-primary{background:var(--btn-bg);color:var(--btn-fg)}
+.btn-primary:hover{background:var(--btn-hover)}
+.btn-gold{background:var(--gold);color:#0c2747}
+.btn-gold:hover{background:var(--gold-hi)}
+.btn-line{border-color:var(--line-strong);color:var(--heading);background:transparent}
+.btn-line:hover{background:var(--heading);color:var(--bg)}
+.btn-line-light{border-color:rgba(255,255,255,.55);color:#fff;background:transparent}
+.btn-line-light:hover{background:#fff;color:#0c2747;border-color:#fff}
+.btn-gold-line{border-color:var(--gold);color:#fff;background:transparent}
+.btn-gold-line:hover{background:var(--gold);color:#0c2747}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.text-link{display:inline-flex;align-items:center;gap:.375rem;font-weight:500;text-decoration:none;color:var(--heading);padding:.5rem 0;background:none;border:0;font-size:.9375rem;cursor:pointer;font-family:inherit}
+.text-link svg{width:16px;height:16px;transition:transform .3s var(--ease)}
+.text-link:hover svg{transform:translateX(4px)}
+.text-link span{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .35s var(--ease)}
+.text-link:hover span{background-size:100% 1px}
+
+/* ---------- Header ---------- */
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;transition:box-shadow .3s}
+.site-header.scrolled{box-shadow:var(--sh-sm)}
+.topbar{background:var(--n-50);color:#0c2747}
+.topbar .wrap{display:flex;align-items:center;gap:40px;height:72px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#0c2747;font-weight:600;font-size:1.1875rem;letter-spacing:-.005em;flex-shrink:0}
+.logo svg{width:28px;height:35px;transition:transform .4s var(--ease)}
+.logo:hover svg{transform:rotate(-6deg) scale(1.05)}
+.mainnav{display:flex;gap:28px;margin-right:auto}
+.mainnav a{text-decoration:none;font-size:.9375rem;color:#4e4a47;position:relative;padding:6px 0;transition:color .2s}
+.mainnav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.mainnav a:hover,.mainnav a[aria-current="page"]{color:#0c2747}
+.mainnav a:hover::after,.mainnav a[aria-current="page"]::after{transform:scaleX(1)}
+.topbar .btn-primary{background:#0c2747;color:#fff;min-height:40px;padding:0 1.25rem;font-size:.875rem}
+.topbar .btn-primary:hover{background:#1a3d6b}
+.specbar{background:#f4efe6;border-bottom:1px solid rgba(12,39,71,.08)}
+.specbar .wrap{display:flex;gap:clamp(20px,4vw,56px);height:48px;align-items:center;overflow-x:auto;scrollbar-width:none}
+.specbar .wrap::-webkit-scrollbar{display:none}
+.specbar a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:.875rem;color:#0c2747;position:relative;padding:4px 0;transition:color .2s}
+.specbar a:hover{color:#b98222}
+.specbar a[aria-current="page"]{color:#c98c1f}
+.specbar a[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:-12px;height:2px;background:var(--gold)}
+.burger{display:none;margin-left:auto;width:44px;height:44px;border:0;background:none;cursor:pointer;color:#0c2747;border-radius:8px}
+.burger span{display:block;width:22px;height:2px;background:currentColor;margin:5px auto;transition:transform .3s var(--ease),opacity .2s}
+.site-header.open .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.site-header.open .burger span:nth-child(2){opacity:0}
+.site-header.open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobilepanel{display:none}
+@media (max-width:860px){
+  .mainnav,.topbar .btn-primary{display:none}
+  .burger{display:block}
+  .topbar .wrap{height:64px}
+  .mobilepanel{display:block;max-height:0;overflow:hidden;background:var(--n-50);transition:max-height .4s var(--ease)}
+  .site-header.open .mobilepanel{max-height:640px;border-bottom:1px solid rgba(12,39,71,.1)}
+  .mobilepanel nav{display:grid;gap:4px;padding:8px var(--gutter) 24px}
+  .mobilepanel a{text-decoration:none;color:#0c2747;font-size:1.0625rem;padding:10px 0;border-bottom:1px solid rgba(12,39,71,.08)}
+  .mobilepanel .btn{margin-top:16px;color:#fff;border:0}
+}
+
+/* ---------- Image placeholders ---------- */
+.ph{position:relative;overflow:hidden;background:var(--ph-pattern),linear-gradient(135deg,var(--ph-a),var(--ph-b));background-size:96px 96px,cover}
+.ph-dark{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='%23ffffff' fill-opacity='.05'%3E%3Cellipse cx='30' cy='36' rx='4' ry='5.5'/%3E%3Cellipse cx='40' cy='29' rx='4' ry='5.5'/%3E%3Cellipse cx='51' cy='29' rx='4' ry='5.5'/%3E%3Cellipse cx='60' cy='36' rx='4' ry='5.5'/%3E%3Cpath d='M33 52c0-7 6-12 12-12s12 5 12 12c0 4-4 5-6 4s-4-2-6-2-4 1-6 2-6 0-6-4z'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(135deg,#2a4a75,#1a3458);background-size:96px 96px,cover}
+.ph-label{position:absolute;left:12px;top:12px;z-index:2;display:inline-flex;align-items:center;gap:6px;font-size:.75rem;line-height:1;padding:6px 10px;border-radius:999px;background:var(--ph-chip);color:var(--ph-ink);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.ph-dark .ph-label{background:rgba(10,23,41,.45);color:rgba(255,255,255,.75)}
+.ph-label svg{width:12px;height:12px}
+
+/* ---------- Reveal on scroll ---------- */
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.hero-anim.play>*{animation:rise .9s var(--ease) both}
+.hero-anim.play>*:nth-child(2){animation-delay:.08s}
+.hero-anim.play>*:nth-child(3){animation-delay:.16s}
+.hero-anim.play>*:nth-child(4){animation-delay:.24s}
+.hero-anim.play>*:nth-child(5){animation-delay:.32s}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .rv{opacity:1;transform:none;transition:none}
+  .hero-anim.play>*{animation:none}
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+
+/* ---------- Home hero ---------- */
+.hero-split{display:grid;grid-template-columns:1.05fr 1fr;min-height:clamp(520px,72vh,680px)}
+.hero-split .ph{min-height:320px}
+.hero-panel{background:linear-gradient(160deg,#0c2747,#1f3d66);color:#d9dfe8;display:flex;align-items:center;padding:clamp(48px,6vw,96px) clamp(28px,6vw,96px)}
+.hero-panel .inner{max-width:480px}
+.hero-panel .shield{width:44px;height:56px;margin-bottom:24px}
+.hero-panel h1{color:#fff;margin-bottom:12px}
+.hero-panel .tag{color:var(--gold);font-size:clamp(1.25rem,2vw,1.5rem);font-weight:500;line-height:1.35;margin-bottom:20px}
+.hero-panel p.lead{margin-bottom:32px;font-size:1.0625rem}
+@media (max-width:860px){.hero-split{grid-template-columns:1fr}.hero-split .ph{aspect-ratio:4/3;min-height:0}}
+
+/* ---------- Expertise carousel ---------- */
+.sec-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:clamp(32px,4vw,48px)}
+.arrows{display:flex;gap:10px}
+.arrow{width:44px;height:44px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;color:var(--heading);display:grid;place-items:center;cursor:pointer;transition:background .25s,color .25s,transform .25s var(--ease),opacity .2s}
+.arrow:hover:not(:disabled){background:var(--heading);color:var(--bg);transform:scale(1.06)}
+.arrow:disabled{opacity:.3;cursor:default}
+.arrow svg{width:18px;height:18px}
+.track{--bleed:max(var(--gutter),calc((100vw - 1200px)/2));display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--bleed);padding:8px var(--bleed) 24px;margin-inline:calc(-1 * var(--bleed));scrollbar-width:none;cursor:grab}
+.track::-webkit-scrollbar{display:none}
+.track.dragging{cursor:grabbing;scroll-snap-type:none}
+.track.dragging *{pointer-events:none}
+.xcard{flex:0 0 clamp(260px,27vw,330px);aspect-ratio:3/4;scroll-snap-align:start;border-radius:var(--r-card);position:relative;overflow:hidden;color:#fff;box-shadow:var(--sh-xs);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.xcard .ph{position:absolute;inset:0;transition:transform .8s var(--ease)}
+.xcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,39,71,0) 30%,rgba(12,39,71,.78) 62%,rgba(12,39,71,.96));transition:opacity .45s}
+.xcard .body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:24px}
+.xcard h3{color:#fff;font-size:1.625rem;margin-bottom:8px}
+.xcard p{font-size:.875rem;line-height:1.55;color:rgba(255,255,255,.86);margin-bottom:18px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.xcard .btn{min-height:38px;padding:0 1.125rem;font-size:.8125rem}
+.xcard:hover{transform:translateY(-6px);box-shadow:var(--sh-lg)}
+.xcard:hover .ph{transform:scale(1.06)}
+.dots{display:flex;gap:8px;margin-top:8px}
+.dot{width:8px;height:8px;border-radius:999px;border:0;padding:0;background:var(--line-strong);opacity:.3;cursor:pointer;transition:width .35s var(--ease),opacity .25s,background .25s}
+.dot[aria-current="true"]{width:28px;opacity:1;background:var(--gold)}
+.navy .dot{background:#fff}.navy .dot[aria-current="true"]{background:var(--gold)}
+
+/* ---------- Stats + values (home) ---------- */
+.intro-split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,6vw,96px);align-items:start}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:clamp(48px,6vw,72px)}
+.stat{padding:8px clamp(16px,2.5vw,32px);border-left:1px solid rgba(255,255,255,.22)}
+.stat:first-child{border-left:0;padding-left:0}
+.stat svg{width:30px;height:30px;color:var(--gold);margin-bottom:20px;transition:transform .4s var(--ease)}
+.stat:hover svg{transform:translateY(-3px) rotate(-4deg)}
+.stat .num{font-size:clamp(2.5rem,4.5vw,3.5rem);font-weight:500;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+.stat .lbl{margin-top:10px;font-size:.9375rem;color:#c7d0dc}
+.values-head{text-align:center;max-width:620px;margin:clamp(96px,11vw,152px) auto clamp(40px,5vw,56px)}
+.values-head h2{margin-bottom:16px}
+.values{display:grid;grid-template-columns:repeat(6,1fr);gap:24px}
+.vcard{grid-column:span 2;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-card);padding:14px 14px 28px;transition:transform .45s var(--ease),background .35s,border-color .35s}
+.vcard:nth-child(4){grid-column:2/span 2}
+.vcard .ph{aspect-ratio:16/10;border-radius:3px;margin-bottom:22px}
+.vcard h3{font-size:1.5rem;margin:0 10px 8px}
+.vcard p{margin:0 10px;font-size:.9375rem;color:#c7d0dc}
+.vcard:hover{transform:translateY(-6px);background:rgba(255,255,255,.1);border-color:rgba(214,154,45,.55)}
+
+/* ---------- Join / pathways ---------- */
+.join{display:grid;grid-template-columns:1.15fr .85fr}
+.join .content{padding:var(--sec) clamp(28px,6vw,96px) var(--sec) max(var(--gutter),calc((100vw - 1200px)/2))}
+.join .ph{min-height:420px}
+.join h2{margin-bottom:6px}
+.scribbled{display:inline-block;position:relative;padding-bottom:6px}
+.scribble{position:absolute;left:-4%;bottom:-8px;width:108%;height:18px;overflow:visible;pointer-events:none}
+.scribble path{fill:none;stroke:var(--gold);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:260;stroke-dashoffset:260;transition:stroke-dashoffset 1.1s cubic-bezier(.6,.1,.2,1) .35s}
+.scribble path+path{stroke-width:3;opacity:.7;transition-delay:.9s}
+.scribbled.in .scribble path,html:not(.js) .scribble path{stroke-dashoffset:0}
+@media (prefers-reduced-motion:reduce){.scribble path{stroke-dashoffset:0;transition:none}}
+.join .sub{font-size:clamp(1.25rem,2vw,1.5rem);font-weight:600;color:var(--heading);line-height:1.3;margin-bottom:clamp(32px,4vw,48px);max-width:420px}
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:36px 40px;margin-bottom:44px}
+.path{padding-top:4px}
+.path svg{width:26px;height:26px;color:var(--gold);margin-bottom:12px;transition:transform .4s var(--ease)}
+.path:hover svg{transform:scale(1.15)}
+.path h4{font-size:1.0625rem;margin-bottom:8px}
+.path p{font-size:.9375rem;line-height:1.55}
+@media (max-width:960px){
+  .join{grid-template-columns:1fr}.join .ph{min-height:0;aspect-ratio:16/10;order:-1}
+  .join .content{padding:var(--sec) var(--gutter)}
+}
+
+/* ---------- About ---------- */
+.about-hero{position:relative;overflow:hidden;padding-block:clamp(80px,10vw,144px) clamp(72px,8vw,112px)}
+.about-hero .wm{position:absolute;right:max(-60px,calc((100vw - 1200px)/2 - 40px));top:50%;width:clamp(260px,36vw,460px);height:auto;aspect-ratio:33/42;transform:translateY(-50%);opacity:.32;pointer-events:none;animation:drift 12s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translateY(calc(-50% - 14px)) rotate(-2deg)}}
+.about-hero .inner{position:relative;max-width:560px}
+.about-hero .meet{color:var(--gold);display:block}
+.about-hero .tag{font-size:clamp(1.25rem,2vw,1.5rem);font-weight:600;color:#fff;margin:14px 0 20px}
+.about-hero p{margin-bottom:32px}
+.inside-head{text-align:center;margin-bottom:clamp(36px,4vw,52px)}
+.inside-head h2{margin-bottom:12px}
+.vids{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.vid{background:var(--surface);border-radius:var(--r-card);overflow:hidden;color:var(--body);text-align:left;border:0;padding:0;cursor:pointer;font:inherit;box-shadow:var(--sh-sm);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.vid .ph{aspect-ratio:16/10}
+.vid .play{position:absolute;left:50%;top:50%;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:999px;background:rgba(12,39,71,.88);color:#fff;display:grid;place-items:center;z-index:2;transition:transform .4s var(--ease),background .3s}
+.vid .play svg{width:20px;height:20px;margin-left:3px}
+.vid .body{padding:24px 24px 20px}
+.navy .vid h3{font-size:1.375rem;margin-bottom:8px;color:var(--heading)}
+.vid p{font-size:.9375rem;margin-bottom:12px}
+.vid:hover{transform:translateY(-6px);box-shadow:var(--sh-xl)}
+.vid:hover .play{transform:scale(1.12);background:var(--gold)}
+.leaders-head{max-width:640px;margin-bottom:clamp(40px,5vw,64px)}
+.leaders-head h2{margin-bottom:16px}
+.leaders-head p{font-weight:500;color:var(--heading)}
+.leaders{display:grid;grid-template-columns:1fr 1fr;gap:48px clamp(32px,5vw,72px)}
+.leader{display:grid;grid-template-columns:clamp(120px,14vw,168px) 1fr;gap:24px;align-items:start}
+.leader .ph{aspect-ratio:1;border-radius:var(--r-card);display:grid;place-items:center;transition:transform .45s var(--ease)}
+.leader .ph b{font-size:2rem;font-weight:600;color:var(--ph-ink);position:relative;z-index:1}
+.leader:hover .ph{transform:scale(1.03)}
+.leader h4{font-size:1.0625rem;margin-bottom:2px}
+.leader .role{font-size:.875rem;color:#a87412;font-weight:500;margin-bottom:10px}
+:root[data-theme="dark"] .leader .role{color:var(--gold)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .leader .role{color:var(--gold)}}
+.leader p{font-size:.9375rem}
+.family{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,96px);align-items:center}
+.family .ph{aspect-ratio:5/4;border-radius:var(--r-card)}
+.mph{display:flex;align-items:center;gap:8px;color:#fff;font-weight:700;font-size:1.375rem;margin-bottom:20px}
+.mph small{display:block;font-size:.625rem;letter-spacing:.18em;color:var(--gold);font-weight:600;margin-top:-4px}
+.mph svg{width:22px;height:22px;color:var(--gold)}
+.family h2{margin-bottom:28px}
+.fam-item{padding:18px 0;border-top:1px solid rgba(255,255,255,.14)}
+.fam-item h4{font-size:1.0625rem;margin-bottom:6px}
+.fam-item p{font-size:.9375rem;color:#c7d0dc}
+.family .closer{font-size:1.125rem;font-weight:600;color:#fff;margin:24px 0 28px;line-height:1.45}
+
+/* ---------- Cardiology ---------- */
+.spec-banner{display:grid;grid-template-columns:1fr 1.25fr;min-height:clamp(240px,30vw,360px)}
+.lockup{display:flex;align-items:center;gap:16px;padding:40px max(var(--gutter),calc((100vw - 1200px)/2));background:var(--bg-alt)}
+.lockup svg{width:clamp(48px,5vw,64px);height:auto;aspect-ratio:33/42}
+.lockup .n{white-space:nowrap;font-size:clamp(1.5rem,2.6vw,2.125rem);font-weight:600;color:var(--heading);line-height:1.1}
+.lockup .s{font-size:clamp(.875rem,1.2vw,1.0625rem);letter-spacing:.2em;color:var(--body);margin-top:4px}
+.spec-banner .ph{min-height:240px}
+.cvca{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(40px,6vw,96px);align-items:center;margin-top:clamp(80px,9vw,128px)}
+.cvca .ph{aspect-ratio:16/9;border-radius:var(--r-card);cursor:pointer;border:0;padding:0;width:100%}
+.cvca .play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border-radius:999px;background:rgba(255,255,255,.92);color:#0c2747;display:grid;place-items:center;z-index:2;transition:transform .4s var(--ease),background .3s}
+.cvca .ph:hover .play{transform:scale(1.12);background:var(--gold)}
+.cvca .play svg{width:22px;height:22px;margin-left:4px}
+.cvca h2{margin-bottom:12px}
+.cvca .sub{font-size:1.125rem;font-weight:600;color:#fff;margin-bottom:36px;max-width:420px}
+.cvca .copy{color:#d9dfe8;max-width:480px}
+.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.mini-stats .num{font-size:clamp(2rem,3.4vw,2.75rem);font-weight:500;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+.mini-stats .lbl{font-size:.875rem;color:#c7d0dc;margin-top:8px}
+.adv-head{margin-bottom:clamp(40px,5vw,64px)}
+.adv-head h2{margin-bottom:12px}
+.adv-head p{font-weight:500;color:var(--heading)}
+.adv{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,4vw,56px) clamp(32px,5vw,80px)}
+.adv-item{display:grid;grid-template-columns:clamp(96px,11vw,132px) 1fr;gap:clamp(20px,2.5vw,32px);align-items:start}
+.tile{aspect-ratio:1;border-radius:var(--r-card);background:linear-gradient(150deg,#1f3d66,#0c2747);display:grid;place-items:center;color:var(--gold);box-shadow:var(--sh-sm);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.tile svg{width:52%;height:52%;transition:transform .5s var(--ease)}
+.adv-item:hover .tile{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+.adv-item:hover .tile svg{transform:scale(1.08) rotate(-3deg)}
+.adv-item h3{font-size:1.375rem;margin:6px 0 10px}
+.adv-item p{font-size:.9375rem}
+.caring{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,6vw,96px);align-items:center}
+.caring h2{margin-bottom:20px}
+.caring .lead{margin-bottom:28px}
+.caring h4{font-size:1rem;margin-bottom:16px}
+.checks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px 28px}
+.checks li{display:flex;gap:10px;font-size:.9375rem;align-items:flex-start;line-height:1.45}
+.checks svg{width:18px;height:18px;flex-shrink:0;color:var(--gold);margin-top:1px}
+.caring .ph{aspect-ratio:4/5;border-radius:var(--r-card);box-shadow:var(--sh-lg)}
+.cta{text-align:center}
+.cta h2{margin-bottom:16px}
+.cta p{max-width:600px;margin:0 auto 32px}
+
+/* ---------- Contact ---------- */
+.contact{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 120px)}
+.contact .ph{min-height:360px}
+.contact .formside{background:var(--bg-alt);position:relative;padding:clamp(56px,6vw,88px) clamp(24px,5vw,72px)}
+.contact .inner{max-width:520px;margin:0 auto}
+.close{position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:999px;border:0;background:transparent;color:var(--heading);display:grid;place-items:center;cursor:pointer;text-decoration:none;transition:background .25s,transform .35s var(--ease)}
+.close:hover{background:var(--line);transform:rotate(90deg)}
+.close svg{width:20px;height:20px}
+.contact h1{font-size:clamp(1.875rem,3vw,2.375rem);text-align:center;margin-bottom:16px}
+.contact .intro{text-align:center;color:var(--heading);margin-bottom:40px}
+.contact .intro p+p{margin-top:14px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:20px 16px}
+.field{display:grid;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:.875rem;color:var(--heading);font-weight:500}
+.input{width:100%;height:48px;padding:0 18px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;color:var(--heading);font:400 1rem var(--font);transition:border-color .2s,box-shadow .2s,background .2s}
+.input::placeholder{color:var(--neutral)}
+.input:hover{background:var(--surface)}
+.input:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(214,154,45,.25);background:var(--surface)}
+textarea.input{height:auto;min-height:132px;padding:14px 18px;border-radius:18px;resize:vertical}
+select.input{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23ada29c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center;padding-right:44px;cursor:pointer}
+select.input option{color:#0c2747;background:#fff}
+.field.invalid .input{border-color:var(--err)}
+.err{font-size:.8125rem;color:var(--err);min-height:0}
+.terms{grid-column:1/-1;display:flex;align-items:center;gap:10px;font-size:.875rem;color:var(--heading)}
+.terms input{width:18px;height:18px;accent-color:#0c2747;cursor:pointer}
+.terms a{color:inherit}
+.form .submit{grid-column:1/-1;justify-self:center;margin-top:12px;min-width:160px}
+.success{text-align:center;padding:48px 0}
+.success .ok{width:64px;height:64px;border-radius:999px;background:var(--gold);color:#0c2747;display:grid;place-items:center;margin:0 auto 24px;animation:pop .6s var(--ease)}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+.success .ok svg{width:28px;height:28px}
+.success h2{margin-bottom:12px}
+.success p{margin-bottom:28px}
+
+/* ---------- Footer ---------- */
+.footer{background:#0c2747;color:#d9dfe8;padding:clamp(64px,7vw,96px) 0 32px}
+.footer .grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px}
+.footer .logo{color:#fff;margin-bottom:24px}
+.footer p{font-size:.9375rem}
+.news{display:flex;gap:8px;margin-top:20px;max-width:440px}
+.news .input{border-color:var(--gold);color:#fff;height:46px}
+.news .input::placeholder{color:#93a0b2}
+.news .input:hover,.news .input:focus{background:rgba(255,255,255,.04)}
+.news .btn{min-height:46px;flex-shrink:0}
+.news-note{font-size:.75rem;color:#93a0b2;margin-top:12px;max-width:440px}
+.news-note a{color:inherit}
+.news-msg{font-size:.875rem;margin-top:10px;min-height:1.4em;color:var(--gold)}
+.footer ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.footer ul a{text-decoration:none;font-size:.9375rem;color:#d9dfe8;transition:color .2s,padding .3s var(--ease)}
+.footer ul a:hover{color:var(--gold);padding-left:4px}
+.footer h5{color:#fff;font-size:1rem;margin-bottom:16px}
+.social a{display:flex;align-items:center;gap:10px}
+.social svg{width:18px;height:18px}
+.footer .bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:clamp(56px,7vw,96px);padding-top:24px;border-top:1px solid rgba(255,255,255,.18);font-size:.8125rem}
+.footer .bottom nav{display:flex;gap:24px;flex-wrap:wrap}
+.footer .bottom a{color:#d9dfe8}
+.footer .bottom a:hover{color:var(--gold)}
+
+/* ---------- Modal + toast ---------- */
+dialog{border:0;padding:0;border-radius:10px;width:min(880px,92vw);background:#0c2747;color:#fff;box-shadow:var(--sh-xl)}
+dialog::backdrop{background:rgba(6,16,30,.72);backdrop-filter:blur(4px)}
+dialog[open]{animation:pop .4s var(--ease)}
+dialog .ph{aspect-ratio:16/9;display:grid;place-items:center;text-align:center}
+dialog .ph div{position:relative;z-index:1;color:rgba(255,255,255,.85);padding:24px}
+dialog .ph strong{display:block;font-size:1.25rem;font-weight:600;color:#fff;margin-bottom:6px}
+dialog .close{color:#fff;z-index:3;background:rgba(0,0,0,.25)}
+dialog .close:hover{background:rgba(255,255,255,.15)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,24px);opacity:0;background:#0c2747;color:#fff;padding:14px 22px;border-radius:999px;font-size:.9375rem;box-shadow:var(--sh-xl);z-index:80;pointer-events:none;transition:opacity .3s,transform .4s var(--ease);max-width:calc(100vw - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:960px){
+  .intro-split,.family,.cvca,.caring{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr;row-gap:40px}
+  .stat:nth-child(3){border-left:0;padding-left:0}
+  .values{grid-template-columns:1fr 1fr}
+  .vcard,.vcard:nth-child(4){grid-column:auto}
+  .vids{grid-template-columns:1fr 1fr}
+  .leaders,.adv{grid-template-columns:1fr}
+  .footer .grid{grid-template-columns:1fr 1fr}
+  .footer .grid>div:first-child{grid-column:1/-1}
+  .contact{grid-template-columns:1fr}.contact .ph{aspect-ratio:16/10;min-height:0}
+  .spec-banner{grid-template-columns:1fr}.spec-banner .ph{order:-1;min-height:220px}
+}
+@media (max-width:600px){
+  .values,.vids,.paths,.checks,.form{grid-template-columns:1fr}
+  .leader{grid-template-columns:96px 1fr;gap:16px}
+  .mini-stats{grid-template-columns:repeat(3,1fr);gap:12px}
+  .sec-head .arrows{display:none}
+  .news{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="shield" viewBox="0 0 33 42"><path fill-rule="evenodd" d="M16.4271 0C21.0685 0.0358207 26.2621 0.937182 31.5035 3.39408L32.8542 4.02712V18.9058C32.8542 22.3586 32.6354 26.439 30.5553 29.9826C28.2335 33.9378 24.0174 38.5057 17.1824 40.8296L16.4271 41.0862L15.6717 40.8296C8.83674 38.5057 4.62063 33.9378 2.29887 29.9826C0.218757 26.439 0 22.3586 0 18.9058V4.02712L1.3507 3.39408C6.5921 0.937185 11.7857 0.0358172 16.4271 0Z" fill="#0C2747"/><path d="M16.3687 1.39078C20.6507 1.42423 25.4408 2.26312 30.2749 4.54898L31.4028 5.08218V18.881C31.4028 22.1124 31.1978 25.8814 29.2983 29.1457C27.2296 32.7008 23.5266 36.7889 17.5815 39.0011L16.9995 39.2091L16.3696 39.424L15.7397 39.2091C9.45323 37.053 5.57536 32.8154 3.43994 29.1457C1.54063 25.8815 1.33547 22.1124 1.33545 18.881V5.08218L2.46436 4.54898C7.29775 2.26351 12.0871 1.42442 16.3687 1.39078Z" fill="#13294C" stroke="#F8F6F1" stroke-width="0.44"/><path d="M10.1177 17.5569C10.6532 19.9154 9.7581 22.1225 8.11846 22.4866C6.47883 22.8507 4.71554 21.2338 4.18006 18.8753C3.64458 16.5168 4.53967 14.3096 6.17931 13.9456C7.81895 13.5815 9.58223 15.1983 10.1177 17.5569Z" fill="#D69A2D"/><path d="M15.4361 11.3242C15.8631 13.7043 14.8679 15.8691 13.2132 16.1594C11.5586 16.4497 9.87115 14.7555 9.44416 12.3755C9.01718 9.99536 10.0124 7.83057 11.667 7.54027C13.3216 7.24997 15.0091 8.94408 15.4361 11.3242Z" fill="#D69A2D"/><path d="M23.1454 11.1818C23.1945 13.5986 21.8723 15.5848 20.1922 15.6182C18.5121 15.6516 17.1103 13.7194 17.0612 11.3027C17.0121 8.8859 18.3343 6.89965 20.0144 6.86627C21.6945 6.83289 23.0963 8.76501 23.1454 11.1818Z" fill="#D69A2D"/><path d="M28.0911 19.0311C27.7011 21.4174 26.04 23.1368 24.3811 22.8716C22.7222 22.6064 21.6936 20.457 22.0836 18.0707C22.4737 15.6844 24.1348 13.9649 25.7937 14.2301C27.4526 14.4954 28.4812 16.6448 28.0911 19.0311Z" fill="#D69A2D"/><path d="M7.2558 29.0865C5.72838 26.51 7.89415 24.5553 9.16796 23.9C12.3212 21.7582 11.5246 21.6333 13.3145 18.7077C15.1044 15.7821 18.189 16.7645 19.1426 18.0065C20.7031 20.0389 20.8116 21.585 21.7241 22.8762C22.7812 24.3719 26.0149 23.5252 25.7435 27.6151C25.4721 31.705 21.1027 30.4975 20.2277 29.814C19.3526 29.1306 16.9094 27.8925 14.8052 28.5839C12.7011 29.2752 9.16507 32.3071 7.2558 29.0865Z" fill="#D69A2D"/><path opacity="0.17" d="M16.3359 41.0537L15.6719 40.8281C8.83693 38.5042 4.6206 33.9366 2.29883 29.9814C0.218719 26.4379 0 22.3571 0 18.9043V4.02539L1.35059 3.39258C6.55766 0.951772 11.7178 0.0468751 16.3359 0V41.0537Z" fill="#F8F6F1"/></symbol>
+  <symbol id="chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="chevl" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="play" viewBox="0 0 24 24"><path d="M6 4.5v15l13-7.5z" fill="currentColor"/></symbol>
+  <symbol id="cam" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="m21 15-5-5-9 9"/></g></symbol>
+  <symbol id="x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="paw" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="6" cy="10" rx="2" ry="2.6"/><ellipse cx="10" cy="6.5" rx="2" ry="2.6"/><ellipse cx="14.5" cy="6.5" rx="2" ry="2.6"/><ellipse cx="18.5" cy="10" rx="2" ry="2.6"/><path d="M7 17.5c0-3.4 2.4-6 5.2-6s5.3 2.6 5.3 6c0 2-1.9 2.4-3 1.9-.9-.4-1.5-.8-2.3-.8s-1.4.4-2.3.8c-1 .5-2.9.1-2.9-1.9z"/></g></symbol>
+</svg>
+
+<header class="site-header" id="hdr">
+  <div class="topbar">
+    <div class="wrap">
+      <a class="logo" href="#home" aria-label="Mission Specialty home"><svg><use href="#shield"/></svg>Mission Specialty</a>
+      <nav class="mainnav" aria-label="Main">
+        <a href="#about" data-nav="about">About Us</a>
+        <a href="#careers" data-nav="careers">Careers</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+      </nav>
+      <a class="btn btn-primary" href="#contact">Get in Touch</a>
+      <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mpanel"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobilepanel" id="mpanel">
+    <nav aria-label="Mobile">
+      <a href="#about">About Us</a><a href="#careers">Careers</a><a href="#contact">Contact</a><a href="#cardiology">Cardiology</a>
+      <a class="btn btn-primary" href="#contact">Get in Touch</a>
+    </nav>
+  </div>
+  <nav class="specbar" aria-label="Specialties">
+    <div class="wrap" id="specnav"></div>
+  </nav>
+</header>
+
+<main>
+<!-- ===================== HOME ===================== -->
+<section data-view="home">
+  <div class="hero-split">
+    <div class="ph"><span class="ph-label"><svg><use href="#cam"/></svg>Photo: veterinarian with pug</span></div>
+    <div class="hero-panel">
+      <div class="inner hero-anim">
+        <svg class="shield"><use href="#shield"/></svg>
+        <h1>Mission Specialty</h1>
+        <p class="tag">The Leading Outpatient Specialty Network</p>
+        <p class="lead">Join us to shape the future of veterinary medicine. We’re building a collaborative network of independent outpatient specialists who have the autonomy and support to deliver care at the highest level.</p>
+        <div><a class="btn btn-gold" href="#contact">Let’s Talk</a></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2>Focused Expertise</h2>
+        <div class="arrows" data-arrows></div>
+      </div>
+      <div class="carousel" data-expertise></div>
+    </div>
+  </section>
+
+  <section class="sec navy">
+    <div class="wrap">
+      <div class="intro-split">
+        <h2 class="rv">Mission Specialty<br>in Action</h2>
+        <p class="lead rv" style="--d:.1s">Our network of outpatient specialty hospitals spans the nation and is growing fast. Come join us as we build the greatest veterinary company in the world.</p>
+      </div>
+      <div class="stats">
+        <div class="stat rv"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 14 16 4l12 10v14H4z"/><path d="M13 28v-7h6v7M16 10v6M13 13h6"/></svg><div class="num" data-count="54">54</div><div class="lbl">Specialty Hospitals</div></div>
+        <div class="stat rv" style="--d:.08s"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><rect x="5" y="4" width="18" height="24" rx="2"/><path d="M9 10h10M9 15h7"/><circle cx="23" cy="21" r="4.5"/><path d="m20.5 25-1 5 3.5-2 3.5 2-1-5"/></svg><div class="num" data-count="120" data-suffix="+">120+</div><div class="lbl">Boarded Specialists</div></div>
+        <div class="stat rv" style="--d:.16s"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><circle cx="16" cy="9" r="5"/><path d="M6 28c0-6 4.5-10 10-10s10 4 10 10"/><path d="M11 6h10M16 18v5m-3 0h6"/></svg><div class="num" data-count="200">200</div><div class="lbl">Specialty Residents</div></div>
+        <div class="stat rv" style="--d:.24s"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 9.5 9 8l10 1.5 9-1.5 1 5-2 3 .5 4-3 4-4-1-2 3-3-3-6-.5L4 16z"/></svg><div class="num" data-count="16" data-suffix="+">16+</div><div class="lbl">States</div></div>
+      </div>
+
+      <div class="values-head">
+        <h2 class="rv">People First.<br>Mission Forward.</h2>
+        <p class="rv" style="--d:.1s">Mission Specialty is built with our veterinary specialists at the center. Our model is designed to allow you to deliver the gold standard of care every day.</p>
+      </div>
+      <div class="values">
+        <article class="vcard rv"><div class="ph ph-dark"><span class="ph-label"><svg><use href="#cam"/></svg>Photo: team exam</span></div><h3>Network</h3><p>We are a highly connected team, committed to bettering each other and the profession.</p></article>
+        <article class="vcard rv" style="--d:.08s"><div class="ph ph-dark"><span class="ph-label"><svg><use href="#cam"/></svg>Photo: vet with cat</span></div><h3>Fulfillment</h3><p>We believe in a fulfilling career without the nights, weekends, and on-call shifts.</p></article>
+        <article class="vcard rv" style="--d:.16s"><div class="ph ph-dark"><span class="ph-label"><svg><use href="#cam"/></svg>Photo: imaging room</span></div><h3>Excellence</h3><p>We practice medicine at the highest level with challenging cases, medical autonomy, and industry-shaping thought leadership.</p></article>
+        <article class="vcard rv"><div class="ph ph-dark"><span class="ph-label"><svg><use href="#cam"/></svg>Photo: clinical research</span></div><h3>Innovation</h3><p>We drive clinical research and cutting-edge clinical trials, backed by advanced technology.</p></article>
+        <article class="vcard rv" style="--d:.08s"><div class="ph ph-dark"><span class="ph-label"><svg><use href="#cam"/></svg>Photo: vet with pug</span></div><h3>Ownership</h3><p>We offer a path to real equity in hospitals built around you, supported by an infrastructure built to drive your success.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="join alt" id="pathways">
+    <div class="content">
+      <h2 class="rv scribbled">Join Us!<svg class="scribble" viewBox="0 0 200 18" preserveAspectRatio="none" aria-hidden="true"><path d="M4 11.5C30 7.5 62 5.2 98 6.4c34 1.1 66 3.6 97 2.2"/><path d="M22 15.2c38-3.4 86-4.6 150-2.1"/></svg></h2>
+      <p class="sub rv" style="--d:.06s">Explore Your Mission Specialty Pathway</p>
+      <div class="paths">
+        <div class="path rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 19c.5-3.5 2.8-5.5 5.5-5.5s5 2 5.5 5.5M14 14.2c.9-.5 1.9-.7 3-.7 2.3 0 4 1.6 4.5 4.5"/></svg><h4>Partner with Us</h4><p>Keep doing the work you love, with the specialty support to take it further. We work alongside your team to bring added expertise and capabilities that help you grow your practice and care for more patients.</p></div>
+        <div class="path rv" style="--d:.08s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg><h4>Build with Us</h4><p>We are actively building new specialty locations around strong specialty leaders. For specialists ready to lead, we can put you in the driver’s seat of your career in a newly built specialty hospital.</p></div>
+        <div class="path rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.5"/><path d="M3.5 20c.6-4 3.2-6.5 6.5-6.5 1.3 0 2.5.4 3.5 1M18 14v6m-3-3h6"/></svg><h4>Join Our Team</h4><p>We’re looking for the best boarded specialists ready to take the next step in their career. Competitive compensation, exciting opportunities, and fulfilling work including research, clinical trials, and more.</p></div>
+        <div class="path rv" style="--d:.08s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11v5c2 2 10 2 12 0v-5M22 9v6"/></svg><h4>Explore Residency Programs</h4><p>We offer accredited residencies that give you the chance to learn under the best and brightest boarded specialists in their fields. You will develop the confidence to become a boarded specialist, in the same league as your specialist mentors.</p></div>
+      </div>
+      <div class="btn-row rv">
+        <a class="btn btn-primary" href="#contact">Let’s Talk</a>
+        <a class="text-link" href="#about"><span>Explore Careers</span><svg><use href="#chev"/></svg></a>
+      </div>
+    </div>
+    <div class="ph"><span class="ph-label"><svg><use href="#cam"/></svg>Photo: vet tech with cat</span></div>
+  </section>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section data-view="about" hidden>
+  <section class="navy">
+    <div class="wrap about-hero">
+      <svg class="wm" aria-hidden="true"><use href="#shield"/></svg>
+      <div class="inner hero-anim">
+        <h1><span class="meet">Meet</span>Mission Specialty</h1>
+        <p class="tag">Specialty Care at its Best</p>
+        <p class="lead">Our network is designed to be specialist-first. We start with our specialty leader and build around them. Each specialty follows this model—people first, locally-minded, expanded access.</p>
+        <div class="btn-row"><a class="btn btn-gold" href="#contact">Let’s Talk</a><a class="btn btn-line-light" href="#careers">Explore Careers</a></div>
+      </div>
+    </div>
+    <div class="wrap" style="padding-bottom:var(--sec)">
+      <div class="inside-head">
+        <h2 class="rv">Inside Mission Specialty</h2>
+        <p class="rv" style="--d:.08s">Different paths, great results. Explore what makes us different.</p>
+      </div>
+      <div class="vids">
+        <button class="vid rv" data-video="Partner with Us"><div class="ph"><span class="ph-label"><svg><use href="#cam"/></svg>Video thumbnail</span><span class="play"><svg><use href="#play"/></svg></span></div><div class="body"><h3>Partner with Us</h3><p>Hear firsthand how doctors who’ve joined Mission Specialty are thriving in their practices.</p><span class="text-link"><span>Watch video</span><svg><use href="#chev"/></svg></span></div></button>
+        <button class="vid rv" style="--d:.08s" data-video="Build with Us"><div class="ph"><span class="ph-label"><svg><use href="#cam"/></svg>Video thumbnail</span><span class="play"><svg><use href="#play"/></svg></span></div><div class="body"><h3>Build with Us</h3><p>See what a brand-new specialty hospital looks like from our leading specialists.</p><span class="text-link"><span>Watch video</span><svg><use href="#chev"/></svg></span></div></button>
+        <button class="vid rv" style="--d:.16s" data-video="Join Our Team"><div class="ph"><span class="ph-label"><svg><use href="#cam"/></svg>Video thumbnail</span><span class="play"><svg><use href="#play"/></svg></span></div><div class="body"><h3>Join Our Team</h3><p>Discover what joining Mission Specialty can do for your career.</p><span class="text-link"><span>Watch video</span><svg><use href="#chev"/></svg></span></div></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec alt">
+    <div class="wrap">
+      <div class="leaders-head">
+        <h2 class="rv">Our Leadership Team</h2>
+        <p class="lead rv" style="--d:.08s">Led by people who have built their careers in veterinary care and specialty medicine, our team is dedicated to growing and supporting the Mission Specialty network.</p>
+      </div>
+      <div class="leaders">
+        <article class="leader rv"><div class="ph"><b>JP</b></div><div><h4>Jay Price, DVM</h4><p class="role">CEO</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p></div></article>
+        <article class="leader rv" style="--d:.08s"><div class="ph"><b>JF</b></div><div><h4>Jeff Falone, DVM</h4><p class="role">Senior VP of Mission Specialty</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p></div></article>
+        <article class="leader rv"><div class="ph"><b>TL</b></div><div><h4>Trevor Lemis</h4><p class="role">VP of Operations</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p></div></article>
+        <article class="leader rv" style="--d:.08s"><div class="ph"><b>BM</b></div><div><h4>BK McLaughlin</h4><p class="role">VP of Business Development</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p></div></article>
+        <article class="leader rv"><div class="ph"><b>JF</b></div><div><h4>Jon Fletcher, DVM, DACVIM, Internal Medicine</h4><p class="role">VP Medical Operations of Mission Specialty</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head rv"><h2>Focused Expertise</h2><div class="arrows" data-arrows></div></div>
+      <div class="carousel" data-expertise></div>
+    </div>
+  </section>
+
+  <section class="sec navy-flat">
+    <div class="wrap family">
+      <div class="ph ph-dark rv"><span class="ph-label"><svg><use href="#cam"/></svg>Photo: team with dog</span></div>
+      <div>
+        <div class="mph rv"><div>Mission<small>PET HEALTH</small></div><svg><use href="#paw"/></svg></div>
+        <h2 class="rv">Part of the Mission Pet Health Family</h2>
+        <div class="fam-item rv"><h4>Coast to Coast Care</h4><p>With nearly one thousand hospitals across the country, Mission Pet Health offers a network that provides a full continuum of lifecycle of care to pets — from wellness and prevention care to specialty care.</p></div>
+        <div class="fam-item rv"><h4>Built-in Referral Network</h4><p>As part of the Mission Pet Health network, Mission Specialty is supported with a network of hospitals ready to refer patients who need outpatient specialized care.</p></div>
+        <div class="fam-item rv"><h4>Built by Doctors for Doctors</h4><p>Mission Pet Health has a strong culture of being doctor led, from our CEO through the Specialty leadership team and our hospital teams.</p></div>
+        <p class="closer rv">Get ready to join a team that is people first, mission forward, and poised for continued growth.</p>
+        <a class="btn btn-gold rv" href="#home" data-toast="Mission Pet Health opens in a new site, which isn’t part of this prototype.">Explore Mission Pet Health</a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ===================== SPECIALTY PAGES (rendered from data below) ===================== -->
+<div id="specpages"></div>
+
+<!-- ===================== CONTACT ===================== -->
+<section data-view="contact" hidden>
+  <div class="contact">
+    <div class="ph"><span class="ph-label"><svg><use href="#cam"/></svg>Photo: specialist on phone</span></div>
+    <div class="formside">
+      <a class="close" href="#home" aria-label="Close and return home"><svg><use href="#x"/></svg></a>
+      <div class="inner">
+        <div id="formwrap">
+          <div class="hero-anim">
+            <h1>Get Ready to Shape the Future with Mission Specialty</h1>
+            <div class="intro">
+              <p>We’re looking for the best veterinary specialists across the country, and we’d love to connect!</p>
+              <p>Even if you don’t see a specific position or specialty, we’re always growing and interested in meeting new specialists. <strong>Let’s talk.</strong></p>
+            </div>
+          </div>
+          <form class="form" id="cform" novalidate>
+            <div class="field"><label for="fn">First name</label><input class="input" id="fn" name="fn" autocomplete="given-name" required><span class="err" id="fn-e"></span></div>
+            <div class="field"><label for="ln">Last name</label><input class="input" id="ln" name="ln" autocomplete="family-name" required><span class="err" id="ln-e"></span></div>
+            <div class="field"><label for="em">Email</label><input class="input" id="em" name="em" type="email" autocomplete="email" required><span class="err" id="em-e"></span></div>
+            <div class="field"><label for="ph">Phone number</label><input class="input" id="ph" name="ph" type="tel" autocomplete="tel"><span class="err" id="ph-e"></span></div>
+            <div class="field full"><label for="sp">Specialty</label><select class="input" id="sp" name="sp" required><option value="">Select one…</option><option>Cardiology</option><option>Dental</option><option>Surgery</option><option>Ophthalmology</option><option>Internal Medicine</option><option>Oncology</option><option>Other</option></select><span class="err" id="sp-e"></span></div>
+            <div class="field full"><label for="in">Your interest</label><select class="input" id="in" name="in" required><option value="">Select one…</option><option>Partner with us</option><option>Build with us</option><option>Join our team</option><option>Residency programs</option></select><span class="err" id="in-e"></span></div>
+            <div class="field full"><label for="msg">Message</label><textarea class="input" id="msg" name="msg" placeholder="Type your message…"></textarea></div>
+            <label class="terms"><input type="checkbox" id="tc"> I accept the <a href="#contact">Terms</a></label>
+            <span class="err" id="tc-e" style="grid-column:1/-1;margin-top:-12px"></span>
+            <button class="btn btn-primary submit" type="submit">Send message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <a class="logo" href="#home"><svg><use href="#shield"/></svg>Mission Specialty</a>
+        <p>Join our newsletter to stay up to date on opportunities and expansions.</p>
+        <form class="news" id="nform" novalidate>
+          <label class="sr-only" for="nem">Email address</label>
+          <input class="input" id="nem" type="email" placeholder="Enter your email" autocomplete="email">
+          <button class="btn btn-gold" type="submit">Subscribe</button>
+        </form>
+        <p class="news-msg" id="nmsg" aria-live="polite"></p>
+        <p class="news-note">By subscribing you agree to with our <a href="#home">Privacy Policy</a> and provide consent to receive updates from our company.</p>
+      </div>
+      <ul>
+        <li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#cardiology">Cardiology</a></li><li><a href="#home" data-spec="Dental">Dental</a></li><li><a href="#surgery">Surgery</a></li>
+      </ul>
+      <ul>
+        <li><a href="#ophthalmology">Ophthalmology</a></li><li><a href="#oncology">Oncology</a></li><li><a href="#internal-medicine">Internal Medicine</a></li><li><a href="#contact">Contact</a></li><li><a href="#home" data-toast="Mission Pet Health opens in a new site, which isn’t part of this prototype.">Mission Pet Health</a></li>
+      </ul>
+      <div>
+        <h5>Follow Us</h5>
+        <ul class="social">
+          <li><a href="#home" data-toast="Social links aren’t connected in this prototype."><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-1.6 19.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 12 2z"/></svg>Facebook</a></li>
+          <li><a href="#home" data-toast="Social links aren’t connected in this prototype."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg>Instagram</a></li>
+          <li><a href="#home" data-toast="Social links aren’t connected in this prototype."><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1.8 7.3V18h2.6v-7.7zM7.1 6a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM10 10.3V18h2.6v-4c0-1.1.2-2.1 1.5-2.1s1.4 1.2 1.4 2.2V18h2.6v-4.4c0-2.2-.5-3.9-3-3.9-1.2 0-2 .6-2.4 1.2v-.6z"/></svg>LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 Mission Specialty. All rights reserved.</span>
+      <nav><a href="#home">Privacy Policy</a><a href="#home">Terms of Service</a><a href="#home">Cookies Settings</a></nav>
+    </div>
+  </div>
+</footer>
+
+<dialog id="vdlg" aria-label="Video">
+  <div class="ph ph-dark">
+    <button class="close" id="vclose" aria-label="Close video"><svg><use href="#x"/></svg></button>
+    <div><strong id="vtitle">Video</strong>The video will play here once it’s added to the build.</div>
+  </div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+document.documentElement.classList.add('js');
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Data ---------- */
+const SPECS=[
+ {n:'Cardiology',d:'The largest cardiology network in the US with over 50 boarded cardiologists practicing in 30+ locations nationwide.',p:'Photo: cardiology exam'},
+ {n:'Dental',d:'One of our most rapidly growing networks, with dental specialists across the country. Residency opportunities available!',p:'Photo: dental exam'},
+ {n:'Surgery',d:'Surgery centers are actively being built and will be led by board-certified surgery specialists.',p:'Photo: surgery patient'},
+ {n:'Ophthalmology',d:'With multiple ophthalmology services across growing metro areas, we are building ophthalmology access nationally.',p:'Photo: eye exam'},
+ {n:'Oncology',d:'Designed to meet the demand for oncology specialists, our practices offer specialist-led cutting-edge oncologic care.',p:'Photo: oncology care'},
+ {n:'Internal Medicine',d:'We are building outpatient internal medicine practices from the ground up to offer increased access for our patients.',p:'Photo: internal medicine'}
+];
+const NAV_ORDER=['Cardiology','Dental','Surgery','Ophthalmology','Internal Medicine','Oncology'];
+const slug=n=>n.toLowerCase().replace(/\s+/g,'-');
+const BUILT=['Cardiology','Surgery','Ophthalmology','Internal Medicine','Oncology'];
+const specHref=n=>BUILT.includes(n)?'#'+slug(n):'#home';
+$('#specnav').innerHTML=NAV_ORDER.map(n=>`<a href="${specHref(n)}" ${BUILT.includes(n)?`data-nav="${slug(n)}"`:`data-spec="${n}"`}>${n}</a>`).join('');
+
+/* ---------- Toast ---------- */
+let tt;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),3200)}
+document.addEventListener('click',e=>{
+  const s=e.target.closest('[data-spec]');
+  if(s){e.preventDefault();toast(`The ${s.dataset.spec} page isn’t part of this prototype yet.`);return}
+  const d=e.target.closest('[data-toast]');
+  if(d){e.preventDefault();toast(d.dataset.toast)}
+});
+
+/* ---------- Carousels ---------- */
+$$('[data-expertise]').forEach(host=>{
+  host.innerHTML=`<div class="track" tabindex="0" aria-label="Specialties">${SPECS.map(s=>`
+    <article class="xcard"><div class="ph ph-dark"><span class="ph-label"><svg><use href="#cam"/></svg>${s.p}</span></div>
+      <div class="body"><h3>${s.n}</h3><p>${s.d}</p>
+      <a class="btn btn-gold" href="${specHref(s.n)}" ${BUILT.includes(s.n)?'':`data-spec="${s.n}"`}>Explore</a></div></article>`).join('')}</div>
+    <div class="dots" role="tablist" aria-label="Choose specialty">${SPECS.map((s,i)=>`<button class="dot" aria-label="${s.n}" data-i="${i}"></button>`).join('')}</div>`;
+  const arrows=host.parentElement.querySelector('[data-arrows]');
+  arrows.innerHTML=`<button class="arrow" aria-label="Previous"><svg><use href="#chevl"/></svg></button><button class="arrow" aria-label="Next"><svg><use href="#chev"/></svg></button>`;
+  const track=$('.track',host), cards=$$('.xcard',host), dots=$$('.dot',host), [prev,next]=$$('.arrow',arrows);
+  const step=()=>cards[0].offsetWidth+24;
+  const update=()=>{
+    const max=track.scrollWidth-track.clientWidth;
+    let i=Math.round(track.scrollLeft/step());
+    if(track.scrollLeft>=max-4)i=cards.length-1;
+    dots.forEach((d,k)=>d.setAttribute('aria-current',k===i?'true':'false'));
+    prev.disabled=track.scrollLeft<4; next.disabled=track.scrollLeft>=max-4;
+  };
+  prev.onclick=()=>track.scrollBy({left:-step(),behavior:'smooth'});
+  next.onclick=()=>track.scrollBy({left:step(),behavior:'smooth'});
+  dots.forEach(d=>d.onclick=()=>track.scrollTo({left:d.dataset.i*step(),behavior:'smooth'}));
+  track.addEventListener('scroll',()=>requestAnimationFrame(update),{passive:true});
+  track.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();next.click()}if(e.key==='ArrowLeft'){e.preventDefault();prev.click()}});
+  // drag to scroll (mouse)
+  let down=false,sx=0,sl=0,moved=false;
+  track.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')return;down=true;moved=false;sx=e.clientX;sl=track.scrollLeft});
+  window.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-sx;if(Math.abs(dx)>5){moved=true;track.classList.add('dragging')}track.scrollLeft=sl-dx});
+  window.addEventListener('pointerup',()=>{if(!down)return;down=false;track.classList.remove('dragging');if(moved){const i=Math.round(track.scrollLeft/step());track.scrollTo({left:i*step(),behavior:'smooth'})}});
+  track.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation();moved=false}},true);
+  addEventListener('resize',update);
+  host._update=update;
+});
+
+
+/* ---------- Specialty pages (one shared template) ---------- */
+const ICONS={
+ autonomy:'<path d="M12 6v12a8 8 0 0 0 16 0V6"/><path d="M20 26v6a8 8 0 0 0 16 0v-4"/><circle cx="36" cy="24" r="4"/><path d="M9 6h6M25 6h6"/>',
+ tech:'<rect x="14" y="8" width="28" height="20" rx="2"/><path d="M18 18h5l2-4 3 8 2-4h8M24 28v6M20 34h12"/><rect x="6" y="22" width="12" height="18" rx="2"/><path d="M12 28v6M9 31h6"/>',
+ learn:'<path d="M6 34c6-2 12-2 18 2 6-4 12-4 18-2M6 38c6-2 12-2 18 2 6-4 12-4 18-2"/><path d="M28 6 20 26l-2 6 5-4 8-20z"/>',
+ support:'<path d="M8 40h32V30H22"/><circle cx="18" cy="12" r="3.5"/><path d="M18 16v10l-6 6M18 22l6-3"/><circle cx="30" cy="16" r="3"/><path d="M30 19v7l4 4"/>',
+ network:'<circle cx="24" cy="10" r="4"/><path d="M18 22a6 6 0 0 1 12 0"/><circle cx="12" cy="30" r="4"/><path d="M6 42a6 6 0 0 1 12 0"/><circle cx="36" cy="30" r="4"/><path d="M30 42a6 6 0 0 1 12 0M24 22v4M24 26l-8 2M24 26l8 2"/>',
+ careers:'<path d="M6 20v10c0 4 3 8 8 10h4v-8l-6-6M42 20v10c0 4-3 8-8 10h-4v-8l6-6"/><path d="M24 26s-6-3.5-6-7.5A3.5 3.5 0 0 1 24 16a3.5 3.5 0 0 1 6 2.5c0 4-6 7.5-6 7.5z"/><path d="M14 10l2 2M34 10l-2 2M24 6v3"/>'
+};
+const BENEFITS=['Medical and Dental Insurance','Vision Insurance','Paid Time Off','CE Allowance','Disability Insurance','Professional Fees Covered (AVDC, VDF, AVD)','Licensure Reimbursement','401(k) Match','DEA Covered','Parental Leave'];
+const SUPPORT='Your dedicated field support team understands your opportunities and challenges because they are working side by side with you.';
+const NETWORK='Access a team ready to collaborate and consult on cases, provide support and mentorship, and help you on your path to success.';
+const FULFIL='Support to deliver amazing care including robust compensation and benefits, flexible schedule (no nights, weekends, or on-call shifts), leadership opportunities, collaborative culture, and more.';
+const TECH='Our imaging and technology are top-of-the-line. We constantly assess new technologies and equipment, so you have the very best available.';
+const learn=w=>`We nurture a continuous learning culture, even for our tenured ${w}. Along with CE, you’ll serve as an investigator in clinical trials, participate in mentorship, and develop leadership skills.`;
+const PAGES=[
+ {name:'Cardiology',heroPh:'Photo: cardiologist with Pomeranian',caringPh:'Photo: cardiologist with Pomeranian',
+  title:'Join the Leader in Veterinary Cardiology',
+  intro:'As the largest, most-respected veterinary outpatient cardiology network in the nation, CVCA Cardiac Care for Pets has 30+ locations and over 50 boarded cardiologists along with being one of the most coveted residency programs in veterinary cardiology.',
+  vTitle:'Inside CVCA',vLabel:'CVCA video',vSub:'Experience a day in the life with CVCA’s leading veterinary cardiologists.',
+  stats:[[30,'+','Locations'],[12,'','States (and growing)'],[50,'+','Veterinary cardiologists']],
+  who:'cardiologists',
+  adv:[['Clinical Autonomy','You practice your way. Your diagnostics, your treatment plan, your patients, your local referral community.'],
+       ['Advanced Technology','Our imaging and technology are the same ones used for human cardiology—top-of-the-line. We’re constantly assessing new technologies and equipment, so you always have the very best available.'],
+       ['Continuous Learning','We nurture a continuous learning culture, even for our tenured cardiologists. Along with CE, you’ll serve as an investigator in cutting-edge clinical trials, participate in mentorship, and develop leadership skills.'],
+       ['Dedicated Support',SUPPORT],['Large Cardiologist Network',NETWORK],['Fulfilling Careers',FULFIL]],
+  cta:'Whether you’re a board-certified cardiologist or interested in a residency in cardiology, we have opportunities for you. Just click the link below and indicate your area of interest.'},
+ {name:'Surgery',heroPh:'Photo: surgeon in the OR',caringPh:'Photo: vet reviewing X-ray with cat',
+  title:'Build the Life You Want as a Veterinary Surgeon',
+  intro:'At Mission Specialty, our goal is simple: to build and support happy, collaborative veterinary surgery teams. Exceptional patient care is a natural result. Join our network of boarded veterinary surgeons and discover how fulfilling careers meet fulfilling lives.',
+  vTitle:'Build a Successful, Lasting Surgical Career',vLabel:'Surgery video',
+  vSub:'We’re here to support your success with purpose-built surgery centers and a dedicated specialty infrastructure. You have complete clinical autonomy and are empowered to lead your service your way to create the career you envision.',
+  who:'surgeons',
+  adv:[['Clinical Autonomy','You practice your way. Your surgery protocol, your recovery plan, your patients, your local referral community.'],
+       ['Advanced Technology','Our imaging and technology are the top grade of their kind. We constantly assess new technologies and equipment, so you have the very best available.'],
+       ['Continuous Learning','We nurture a continuous learning culture, even for our tenured surgeons. Along with CE, you’ll participate in mentorship and develop leadership skills.'],
+       ['Dedicated Support',SUPPORT],['Large Network of Surgeons',NETWORK],['Fulfilling Careers',FULFIL]],
+  cta:'Whether you’re a board-certified veterinary surgeon or interested in a surgical residency, we have opportunities for you. Just click the link below and indicate your area of interest.'},
+ {name:'Ophthalmology',heroPh:'Photo: eye exam with cat',caringPh:'Photo: vet with Bengal cat',
+  title:'Our Ophthalmology Network is Growing—Join Us',
+  intro:'We’re building the largest network for boarded veterinary ophthalmologists in the nation. At Mission Specialty, we’re dedicated to ensuring the success of our ophthalmologists and their services.',
+  vTitle:'Build Your Success with Mission Specialty',vLabel:'Ophthalmology video',
+  vSub:'Mission Specialty gives you the resources and space to thrive, and more importantly, to create the kind of life you want as an ophthalmologist. That means you have complete clinical autonomy, and you lead your service your way. We’re here to support you as you create a lasting career for years to come.',
+  who:'ophthalmologists',
+  adv:[['Clinical Autonomy','You practice ophthalmology your way. Your diagnostics, your treatment plan, your patients, your local referral community.'],
+       ['Advanced Technology',TECH],['Continuous Learning',learn('ophthalmologists')],
+       ['Dedicated Support',SUPPORT],['Large Ophthalmologist Network',NETWORK],['Fulfilling Careers',FULFIL]],
+  cta:'Whether you’re a board-certified veterinary ophthalmologist or interested in an ophthalmology residency, we have opportunities for you. Just click the link below and indicate your area of interest.'},
+ {name:'Internal Medicine',heroPh:'Photo: internist examining cat',caringPh:'Photo: vet examining white dog',
+  title:'Build a Lasting Career as a Veterinary Internist',
+  intro:'At Mission Specialty, we’re creating a network of boarded veterinary internists that is specialist-focused and backed by resources that allow you to thrive. We know that when veterinary internal medicine teams are supported and happy, they can deliver exceptional patient care.',
+  vTitle:'Internal Medicine at the Forefront',vLabel:'Internal medicine video',
+  vSub:'Many times internal medicine teams are confronted with challenging cases but are hampered by shared diagnostic equipment and hospital protocols that are not built for them. Mission Specialty sees internal medicine differently. We give internists the space and resources needed for complex work. And we put you in the driver’s seat of delivering high-level patient care.',
+  who:'internists',
+  adv:[['Clinical Autonomy','You practice internal medicine your way. Your diagnostics, your treatment plan, your patients, your local referral community.'],
+       ['Advanced Technology',TECH],['Continuous Learning',learn('internists')],
+       ['Dedicated Support',SUPPORT],['Large Internal Medicine Network',NETWORK],['Fulfilling Careers',FULFIL]],
+  cta:'Whether you’re a board-certified veterinary internist or interested in an internal medicine residency, we have opportunities for you. Just click the link below and indicate your area of interest.'},
+ {name:'Oncology',heroPh:'Photo: oncologist examining dog',caringPh:'Photo: vet examining cat',
+  title:'Join the Leading Network for Veterinary Oncologists',
+  intro:'We know that cancer care is a demanding and challenging specialty. It requires dedicated resources, committed support, and collaborative care. Mission Specialty is creating a network for oncologists that supports your work and your life outside of it.',
+  vTitle:'Support for Successful Oncology Careers',vLabel:'Oncology video',
+  vSub:'Top-level veterinary oncology requires specialized resources and support. That’s where Mission Specialty comes in. We are specialist-focused and are here to back you in the critical care you provide for your patients.',
+  who:'oncologists',
+  adv:[['Clinical Autonomy','You practice oncology your way. Your diagnostics, your treatment plan, your patients, your local referral community.'],
+       ['Advanced Technology',TECH],['Continuous Learning',learn('oncologists')],
+       ['Dedicated Support',SUPPORT],['Large Oncology Network',NETWORK],['Fulfilling Careers',FULFIL]],
+  cta:'Whether you’re a board-certified veterinary oncologist or interested in an oncology residency, we have opportunities for you. Just click the link below and indicate your area of interest.'}
+];
+const ICON_ORDER=['autonomy','tech','learn','support','network','careers'];
+const cam='<svg><use href="#cam"/></svg>';
+$('#specpages').outerHTML=PAGES.map(d=>`
+<section data-view="${slug(d.name)}" hidden>
+  <div class="spec-banner">
+    <div class="lockup hero-anim"><svg><use href="#shield"/></svg><div><div class="n">Mission Specialty</div><div class="s">${d.name.toUpperCase()}</div></div></div>
+    <div class="ph"><span class="ph-label">${cam}${d.heroPh}</span></div>
+  </div>
+  <section class="sec navy">
+    <div class="wrap">
+      <div class="intro-split">
+        <h2 class="rv">${d.title}</h2>
+        <div class="rv" style="--d:.1s"><p style="margin-bottom:28px">${d.intro}</p>
+          <div class="btn-row"><a class="btn btn-gold" href="#contact">Explore Careers</a><a class="btn btn-gold-line" href="#contact">Explore Residency</a></div></div>
+      </div>
+      <div class="cvca">
+        <button class="ph ph-dark rv" data-video="${d.vTitle}" aria-label="Play video: ${d.vTitle}"><span class="ph-label">${cam}${d.vLabel} (16:9)</span><span class="play"><svg><use href="#play"/></svg></span></button>
+        <div>
+          <h2 class="rv">${d.vTitle}</h2>
+          ${d.stats?`<p class="sub rv">${d.vSub}</p><div class="mini-stats">${d.stats.map((st,i)=>`<div class="rv" style="--d:${i*.08}s"><div class="num" data-count="${st[0]}" data-suffix="${st[1]}">${st[0]}${st[1]}</div><div class="lbl">${st[2]}</div></div>`).join('')}</div>`
+                   :`<p class="copy rv" style="--d:.06s;margin-top:20px">${d.vSub}</p>`}
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="sec alt">
+    <div class="wrap">
+      <div class="adv-head"><h2 class="rv">The Mission Specialty Advantage</h2><p class="rv" style="--d:.08s">Discover why the top veterinary ${d.who} choose to work with us.</p></div>
+      <div class="adv">${d.adv.map((a,i)=>`<div class="adv-item rv" style="--d:${(i%2)*.08}s"><div class="tile"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[ICON_ORDER[i]]}</svg></div><div><h3>${a[0]}</h3><p>${a[1]}</p></div></div>`).join('')}</div>
+    </div>
+  </section>
+  <section class="sec">
+    <div class="wrap caring">
+      <div>
+        <h2 class="rv">Caring for People<br>Who Care for Pets</h2>
+        <p class="lead rv" style="--d:.06s">We believe that successful hospitals start with the people providing the care. It’s our top priority to provide high-quality benefits, so our specialists can focus on caring for their patients.</p>
+        <h4 class="rv">Robust compensation packages include:</h4>
+        <ul class="checks rv">${BENEFITS.map(b=>`<li><svg><use href="#check"/></svg>${b}</li>`).join('')}</ul>
+      </div>
+      <div class="ph rv" style="--d:.1s"><span class="ph-label">${cam}${d.caringPh}</span></div>
+    </div>
+  </section>
+  <section class="sec navy cta">
+    <div class="wrap">
+      <h2 class="rv">Ready to Take the Next Step?</h2>
+      <p class="rv" style="--d:.06s">${d.cta}</p>
+      <a class="btn btn-gold rv" style="--d:.12s" href="#contact">Get in Touch</a>
+    </div>
+  </section>
+</section>`).join('');
+
+/* ---------- Reveal + count-up ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.12});
+$$('.rv').forEach(el=>io.observe(el));
+const cio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return; cio.unobserve(e.target);
+  const el=e.target,end=+el.dataset.count,suf=el.dataset.suffix||'';
+  if(reduce){el.textContent=end+suf;return}
+  const t0=performance.now(),dur=1400;
+  const tick=t=>{const p=Math.min(1,(t-t0)/dur),v=Math.round(end*(1-Math.pow(1-p,3)));el.textContent=v+suf;if(p<1)requestAnimationFrame(tick)};
+  el.textContent='0'+suf;requestAnimationFrame(tick);
+}),{threshold:.6});
+$$('[data-count]').forEach(el=>cio.observe(el));
+
+/* ---------- Router ---------- */
+const TITLES={home:'Mission Specialty',about:'About | Mission Specialty',contact:'Contact | Mission Specialty'};
+PAGES.forEach(d=>TITLES[slug(d.name)]=d.name+' | Mission Specialty');
+function route(){
+  const h=location.hash.slice(1)||'home';
+  const view=TITLES[h]?h:'home';
+  $$('[data-view]').forEach(v=>v.hidden=v.dataset.view!==view);
+  document.title=TITLES[view];
+  $$('[data-nav]').forEach(a=>a.dataset.nav===h?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
+  const hero=$(`[data-view="${view}"] .hero-anim`);
+  if(hero){hero.classList.remove('play');void hero.offsetWidth;hero.classList.add('play')}
+  $('#hdr').classList.remove('open');$('.burger').setAttribute('aria-expanded','false');
+  $$('[data-expertise]').forEach(c=>c._update&&c._update());
+  if(h==='careers'){requestAnimationFrame(()=>$('#pathways').scrollIntoView({behavior:reduce?'auto':'smooth'}))}
+  else window.scrollTo({top:0,behavior:'auto'});
+}
+addEventListener('hashchange',route);
+route();
+
+/* ---------- Header ---------- */
+const hdr=$('#hdr');
+addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>8),{passive:true});
+$('.burger').onclick=()=>{const o=hdr.classList.toggle('open');$('.burger').setAttribute('aria-expanded',o)};
+
+/* ---------- Video modal ---------- */
+const dlg=$('#vdlg');
+document.addEventListener('click',e=>{const b=e.target.closest('[data-video]');if(!b)return;$('#vtitle').textContent=b.dataset.video;dlg.showModal()});
+$('#vclose').onclick=()=>dlg.close();
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
+
+/* ---------- Contact form ---------- */
+const form=$('#cform');
+const rules={fn:v=>v.trim()?'':'Enter your first name.',ln:v=>v.trim()?'':'Enter your last name.',
+  em:v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())?'':'Enter an email address like name@clinic.com.',
+  sp:v=>v?'':'Choose your specialty.',in:v=>v?'':'Choose what you’re interested in.'};
+function check(id){const el=$('#'+id),msg=rules[id](el.value),f=el.closest('.field');$('#'+id+'-e').textContent=msg;f.classList.toggle('invalid',!!msg);el.setAttribute('aria-invalid',!!msg);if(msg)el.setAttribute('aria-describedby',id+'-e');return !msg}
+Object.keys(rules).forEach(id=>$('#'+id).addEventListener('blur',()=>{if($('#'+id).value||$('#'+id).closest('.invalid'))check(id)}));
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  let ok=Object.keys(rules).map(check).every(Boolean);
+  const tc=$('#tc').checked;$('#tc-e').textContent=tc?'':'Accept the terms to send your message.';ok=ok&&tc;
+  if(!ok){const bad=$('.field.invalid .input',form)||(!tc&&$('#tc'));bad&&bad.focus();return}
+  const name=$('#fn').value.trim();
+  $('#formwrap').innerHTML=`<div class="success"><div class="ok"><svg><use href="#check"/></svg></div><h2>Message sent</h2><p>Thanks, ${name.replace(/[<>&]/g,'')}. Someone from our recruiting team will reach out within two business days.</p><a class="btn btn-primary" href="#home">Back to home</a></div>`;
+});
+
+/* ---------- Newsletter ---------- */
+$('#nform').addEventListener('submit',e=>{
+  e.preventDefault();const v=$('#nem').value.trim(),m=$('#nmsg');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){m.style.color='#ff9e8f';m.textContent='Enter an email address like name@clinic.com.';return}
+  m.style.color='';m.textContent='You’re subscribed. Watch your inbox for updates.';$('#nem').value='';
+});
+</script>
+</body>
+</html>
