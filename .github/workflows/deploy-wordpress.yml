@@ -1,0 +1,99 @@
+name: Deploy WordPress theme
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-wordpress-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  THEME_SLUG: mission-specialty
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build theme
+        run: bash scripts/build-theme.sh
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.THEME_SLUG }}-theme
+          path: dist/${{ env.THEME_SLUG }}.zip
+          if-no-files-found: error
+
+  deploy:
+    # Only deploy from main (push or manual run), never from pull requests.
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.THEME_SLUG }}-theme
+
+      - name: Unpack theme
+        run: unzip -q "$THEME_SLUG.zip"
+
+      - name: Check deploy settings
+        env:
+          SSH_HOST: ${{ vars.SSH_HOST }}
+          SSH_USER: ${{ vars.SSH_USER }}
+          WP_THEMES_PATH: ${{ vars.WP_THEMES_PATH }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          missing=0
+          for v in SSH_HOST SSH_USER WP_THEMES_PATH SSH_PRIVATE_KEY; do
+            if [ -z "${!v}" ]; then echo "::error::$v is not set (see README: Deploying to WordPress)"; missing=1; fi
+          done
+          exit $missing
+
+      - name: Configure SSH
+        env:
+          SSH_HOST: ${{ vars.SSH_HOST }}
+          SSH_PORT: ${{ vars.SSH_PORT || '22' }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          if [ -n "$SSH_KNOWN_HOSTS" ]; then
+            printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          else
+            echo "::warning::SSH_KNOWN_HOSTS not set; trusting the host key from ssh-keyscan. Set it to pin the key."
+            ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" > ~/.ssh/known_hosts
+          fi
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Sync theme to server
+        env:
+          SSH_HOST: ${{ vars.SSH_HOST }}
+          SSH_USER: ${{ vars.SSH_USER }}
+          SSH_PORT: ${{ vars.SSH_PORT || '22' }}
+          WP_THEMES_PATH: ${{ vars.WP_THEMES_PATH }}
+        run: |
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT -o StrictHostKeyChecking=yes" \
+            "$THEME_SLUG/" "$SSH_USER@$SSH_HOST:${WP_THEMES_PATH%/}/$THEME_SLUG/"
+
+      - name: Activate theme and flush cache (WP-CLI, optional)
+        if: vars.WP_PATH != ''
+        env:
+          SSH_HOST: ${{ vars.SSH_HOST }}
+          SSH_USER: ${{ vars.SSH_USER }}
+          SSH_PORT: ${{ vars.SSH_PORT || '22' }}
+          WP_PATH: ${{ vars.WP_PATH }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "$SSH_PORT" -o StrictHostKeyChecking=yes "$SSH_USER@$SSH_HOST" \
+            "cd '$WP_PATH' && wp theme activate '$THEME_SLUG' && wp cache flush"
