@@ -234,7 +234,8 @@ p{margin:0;text-wrap:pretty}
 .scribble path+path{stroke-width:3;opacity:.7;transition-delay:.9s}
 .scribbled.in .scribble path,html:not(.js) .scribble path{stroke-dashoffset:0}
 @media (prefers-reduced-motion:reduce){.scribble path{stroke-dashoffset:0;transition:none}}
-.join .sub{font-size:clamp(1.25rem,2vw,1.5rem);font-weight:600;color:var(--heading);line-height:1.3;margin-bottom:clamp(32px,4vw,48px);max-width:420px}
+.join .sub{font-size:clamp(1.25rem,2vw,1.5rem);font-weight:600;color:var(--heading);line-height:1.3;margin-bottom:clamp(32px,4vw,48px)}
+@media (min-width:600px){.join .sub{white-space:nowrap}}
 .paths{display:grid;grid-template-columns:1fr 1fr;gap:36px 40px;margin-bottom:44px}
 .path{padding-top:4px}
 .path svg{width:26px;height:26px;color:var(--gold);margin-bottom:12px;transition:transform .4s var(--ease)}
@@ -257,7 +258,7 @@ p{margin:0;text-wrap:pretty}
 .inside-head{text-align:center;margin-bottom:clamp(36px,4vw,52px)}
 .inside-head h2{margin-bottom:12px}
 .vids{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.vid{background:var(--surface);border-radius:var(--r-card);overflow:hidden;color:var(--body);text-align:left;border:0;padding:0;cursor:pointer;font:inherit;box-shadow:var(--sh-sm);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.vid{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;background:var(--surface);border-radius:var(--r-card);overflow:hidden;color:var(--body);text-align:left;border:0;padding:0;cursor:pointer;font:inherit;box-shadow:var(--sh-sm);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
 .vid .ph{aspect-ratio:16/10}
 .vid .play{position:absolute;left:50%;top:50%;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:999px;background:rgba(12,39,71,.88);color:#fff;display:grid;place-items:center;z-index:2;transition:transform .4s var(--ease),background .3s}
 .vid .play svg{width:20px;height:20px;margin-left:3px}
@@ -452,7 +453,7 @@ dialog .close:hover{background:rgba(255,255,255,.15)}
   </div>
   <div class="mobilepanel" id="mpanel">
     <nav aria-label="Mobile">
-      <a href="#about">About Us</a><a href="#careers">Careers</a><a href="#contact">Contact</a><a href="#cardiology">Cardiology</a><a href="#dental">Dental</a><a href="#surgery">Surgery</a><a href="#ophthalmology">Ophthalmology</a><a href="#internal-medicine">Internal Medicine</a><a href="#oncology">Oncology</a>
+      <a href="#about">About Us</a><a href="#careers">Careers</a><a href="#contact">Contact</a><a href="#cardiology">Cardiology</a><a href="#dental">Dental</a><a href="#surgery">Surgery</a><a href="#ophthalmology">Ophthalmology</a><a href="#oncology">Oncology</a><a href="#internal-medicine">Internal Medicine</a>
       <a class="btn btn-primary" href="#contact">Get in Touch</a>
     </nav>
   </div>
@@ -496,7 +497,7 @@ dialog .close:hover{background:rgba(255,255,255,.15)}
       <div class="stats">
         <div class="stat rv"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 14 16 4l12 10v14H4z"/><path d="M13 28v-7h6v7M16 10v6M13 13h6"/></svg><div class="num" data-count="54">54</div><div class="lbl">Specialty Hospitals</div></div>
         <div class="stat rv" style="--d:.08s"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><rect x="5" y="4" width="18" height="24" rx="2"/><path d="M9 10h10M9 15h7"/><circle cx="23" cy="21" r="4.5"/><path d="m20.5 25-1 5 3.5-2 3.5 2-1-5"/></svg><div class="num" data-count="120" data-suffix="+">120+</div><div class="lbl">Boarded Specialists</div></div>
-        <div class="stat rv" style="--d:.16s"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><circle cx="16" cy="9" r="5"/><path d="M6 28c0-6 4.5-10 10-10s10 4 10 10"/><path d="M11 6h10M16 18v5m-3 0h6"/></svg><div class="num" data-count="200">200</div><div class="lbl">Specialty Residents</div></div>
+        <div class="stat rv" style="--d:.16s"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><circle cx="16" cy="8" r="4.5"/><path d="M5 30v-3c0-4.5 3.5-8 8-8h6c4.5 0 8 3.5 8 8v3"/><path d="m13.5 19 2.5 4.5 2.5-4.5"/><path d="M9.5 20.2v3.8a2.25 2.25 0 0 0 4.5 0v-4.4"/><path d="M22.5 19.6v5.6"/><circle cx="22.5" cy="26.8" r="1.6"/></svg><div class="num" data-count="200">200</div><div class="lbl">Specialty Residents</div></div>
         <div class="stat rv" style="--d:.24s"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 9.5 9 8l10 1.5 9-1.5 1 5-2 3 .5 4-3 4-4-1-2 3-3-3-6-.5L4 16z"/></svg><div class="num" data-count="16" data-suffix="+">16+</div><div class="lbl">States</div></div>
       </div>
 
@@ -588,7 +589,7 @@ dialog .close:hover{background:rgba(255,255,255,.15)}
         <div class="mph rv"><div>Mission<small>PET HEALTH</small></div><svg><use href="#paw"/></svg></div>
         <h2 class="rv">Part of the Mission Pet Health Family</h2>
         <div class="fam-item rv"><h4>Coast to Coast Care</h4><p>With nearly one thousand hospitals across the country, Mission Pet Health offers a network that provides a full continuum of lifecycle of care to pets — from wellness and prevention care to specialty care.</p></div>
-        <div class="fam-item rv"><h4>Built-in Referral Network</h4><p>As part of the Mission Pet Health network, Mission Specialty is supported with a network of hospitals ready to refer patients who need outpatient specialized care.</p></div>
+        <div class="fam-item rv"><h4>Mission Referring Partners</h4><p>As part of the Mission Pet Health network, Mission Specialty is supported with a network of hospitals ready to refer patients who need outpatient specialized care.</p></div>
         <div class="fam-item rv"><h4>Built by Doctors for Doctors</h4><p>Mission Pet Health has a strong culture of being doctor led, from our CEO through the Specialty leadership team and our hospital teams.</p></div>
         <p class="closer rv">Get ready to join a team that is people first, mission forward, and poised for continued growth.</p>
         <a class="btn btn-gold rv" href="#home" data-toast="Mission Pet Health opens in a new site, which isn’t part of this prototype.">Explore Mission Pet Health</a>
@@ -692,7 +693,7 @@ const SPECS=[
  {n:'Oncology',d:'Designed to meet the demand for oncology specialists, our practices offer specialist-led cutting-edge oncologic care.',p:'Photo: oncology care'},
  {n:'Internal Medicine',d:'We are building outpatient internal medicine practices from the ground up to offer increased access for our patients.',p:'Photo: internal medicine'}
 ];
-const NAV_ORDER=['Cardiology','Dental','Surgery','Ophthalmology','Internal Medicine','Oncology'];
+const NAV_ORDER=['Cardiology','Dental','Surgery','Ophthalmology','Oncology','Internal Medicine'];
 const slug=n=>n.toLowerCase().replace(/\s+/g,'-');
 const BUILT=['Cardiology','Dental','Surgery','Ophthalmology','Internal Medicine','Oncology'];
 const specHref=n=>BUILT.includes(n)?'#'+slug(n):'#home';
@@ -746,8 +747,8 @@ $$('[data-expertise]').forEach(host=>{
 const ICONS={
  autonomy:'<path d="M12 6v12a8 8 0 0 0 16 0V6"/><path d="M20 26v6a8 8 0 0 0 16 0v-4"/><circle cx="36" cy="24" r="4"/><path d="M9 6h6M25 6h6"/>',
  tech:'<rect x="14" y="8" width="28" height="20" rx="2"/><path d="M18 18h5l2-4 3 8 2-4h8M24 28v6M20 34h12"/><rect x="6" y="22" width="12" height="18" rx="2"/><path d="M12 28v6M9 31h6"/>',
- learn:'<path d="M6 34c6-2 12-2 18 2 6-4 12-4 18-2M6 38c6-2 12-2 18 2 6-4 12-4 18-2"/><path d="M28 6 20 26l-2 6 5-4 8-20z"/>',
- support:'<path d="M8 40h32V30H22"/><circle cx="18" cy="12" r="3.5"/><path d="M18 16v10l-6 6M18 22l6-3"/><circle cx="30" cy="16" r="3"/><path d="M30 19v7l4 4"/>',
+ learn:'<path d="M30 8H11a2 2 0 0 0-2 2v28a2 2 0 0 0 2 2h22a2 2 0 0 0 2-2V24"/><path d="M14 16h11M14 22h9M14 28h6M14 34h10"/><path d="M38.5 7.5a2.6 2.6 0 0 1 3.7 3.7L28 25.4l-5 1.3 1.3-5z"/><path d="m35.5 10.5 3.7 3.7"/>',
+ support:'<circle cx="24" cy="12" r="4.5"/><circle cx="11.5" cy="17" r="3.5"/><circle cx="36.5" cy="17" r="3.5"/><path d="M16 31v-2a8 8 0 0 1 16 0v2"/><path d="M5 31v-1a6.5 6.5 0 0 1 10-5.5M43 31v-1a6.5 6.5 0 0 0-10-5.5"/><path d="M4 35.5c3 0 5 1.5 8 3.5h6.5a2.5 2.5 0 0 0 0-5H14"/><path d="M44 35.5c-3 0-5 1.5-8 3.5h-6.5a2.5 2.5 0 0 1 0-5H34"/>',
  network:'<circle cx="24" cy="10" r="4"/><path d="M18 22a6 6 0 0 1 12 0"/><circle cx="12" cy="30" r="4"/><path d="M6 42a6 6 0 0 1 12 0"/><circle cx="36" cy="30" r="4"/><path d="M30 42a6 6 0 0 1 12 0M24 22v4M24 26l-8 2M24 26l8 2"/>',
  careers:'<path d="M6 20v10c0 4 3 8 8 10h4v-8l-6-6M42 20v10c0 4-3 8-8 10h-4v-8l6-6"/><path d="M24 26s-6-3.5-6-7.5A3.5 3.5 0 0 1 24 16a3.5 3.5 0 0 1 6 2.5c0 4-6 7.5-6 7.5z"/><path d="M14 10l2 2M34 10l-2 2M24 6v3"/>'
 };
@@ -760,15 +761,15 @@ const learn=w=>`We nurture a continuous learning culture, even for our tenured $
 const PAGES=[
  {name:'Cardiology',heroPh:'Photo: cardiologist with Pomeranian',caringPh:'Photo: cardiologist with Pomeranian',
   title:'Join the Leader in Veterinary Cardiology',
-  intro:'As the largest, most-respected veterinary outpatient cardiology network in the nation, CVCA Cardiac Care for Pets has 30+ locations and over 50 boarded cardiologists along with being one of the most coveted residency programs in veterinary cardiology.',
+  intro:'As the largest, most respected veterinary outpatient cardiology network in the nation, CVCA Cardiac Care for Pets has 30+ locations and 50+ boarded cardiologists, along with one of the most sought-after residency programs in veterinary cardiology.',
   vTitle:'Inside CVCA',vLabel:'CVCA video',vSub:'Experience a day in the life with CVCA’s leading veterinary cardiologists.',
-  stats:[[30,'+','Locations'],[12,'','States (and growing)'],[50,'+','Veterinary cardiologists']],
+  stats:[[30,'+','Locations'],[12,'','States'],[50,'+','Veterinary cardiologists']],
   who:'cardiologists',
   adv:[['Clinical Autonomy','You practice your way. Your diagnostics, your treatment plan, your patients, your local referral community.'],
-       ['Advanced Technology','Our imaging and technology are the same ones used for human cardiology—top-of-the-line. We’re constantly assessing new technologies and equipment, so you always have the very best available.'],
+       ['Advanced Technology','Our imaging and technology are the same ones used for human cardiology—top-of-the-line. We are always evaluating emerging technology to support our teams and improve care to patients.'],
        ['Continuous Learning','We nurture a continuous learning culture, even for our tenured cardiologists. Along with CE, you’ll serve as an investigator in cutting-edge clinical trials, participate in mentorship, and develop leadership skills.'],
        ['Dedicated Support',SUPPORT],['Large Cardiologist Network',NETWORK],['Fulfilling Careers',FULFIL]],
-  cta:'Whether you’re a board-certified cardiologist or interested in a residency in cardiology, we have opportunities for you. Just click the link below and indicate your area of interest.'},
+  cta:'Whether you’re a board-certified specialist or pursuing advanced training, discover opportunities to grow your career and make a meaningful impact in veterinary medicine.'},
  {name:'Dental',heroPh:'Photo: dentist examining dog',caringPh:'Photo: vet with white dog',
   title:'Join Our Growing Veterinary Dental Network',
   intro:'Build the life you want as a veterinary dentist with Mission Specialty. We offer dentists the support to deliver patient care at the highest standard, along with a fulfilling life on your terms.',
@@ -776,39 +777,39 @@ const PAGES=[
   vSub:'At Mission Specialty, Dental and Oral Surgery is a critical area of focus, not just a service add-on in a large clinic. Our AVDC-boarded doctors work in hospitals built to deliver advanced oral surgery and care, equipped with advanced technology and support staff for dental services.',
   who:'dentists and oral surgeons',
   adv:[['Clinical Autonomy','You practice your way. Your diagnostics, your treatment plan, your patients, your local referral community.'],
-       ['Advanced Technology','Our imaging and technology are the best of their kind, including cone-beam CT and advanced equipment. We constantly assess new technologies and equipment, so you have the very best available.'],
-       ['Continuous Learning','We nurture a continuous learning culture, even for our tenured dentists. Along with CE, you’ll participate in mentorship and develop leadership skills.'],
+       ['Advanced Technology','Our imaging and technology are the best of their kind, including cone-beam CT and advanced equipment. We are always evaluating emerging technology to support our teams and improve care to patients.'],
+       ['Continuous Learning','We nurture a continuous learning culture, even for our tenured dentists. Along with CE, you’ll participate in mentorship and develop leadership skills to further grow your own team.'],
        ['Dedicated Support',SUPPORT],['Large Dental Specialist Network',NETWORK],['Fulfilling Careers',FULFIL]],
   cta:'Whether you’re a board-certified dentist or interested in a residency in dentistry, we have opportunities for you. Just click the link below and indicate your area of interest.'},
  {name:'Surgery',heroPh:'Photo: surgeon in the OR',caringPh:'Photo: vet reviewing X-ray with cat',
   title:'Build the Life You Want as a Veterinary Surgeon',
-  intro:'At Mission Specialty, our goal is simple: to build and support happy, collaborative veterinary surgery teams. Exceptional patient care is a natural result. Join our network of boarded veterinary surgeons and discover how fulfilling careers meet fulfilling lives.',
+  intro:'At Mission Specialty, we foster happy, collaborative teams across specialties because exceptional patient care follows. Join our network of boarded veterinary surgeons and practice alongside colleagues who share your standards, with the support to shape your career on your terms.',
   vTitle:'Build a Successful, Lasting Surgical Career',vLabel:'Surgery video',
-  vSub:'We’re here to support your success with purpose-built surgery centers and a dedicated specialty infrastructure. You have complete clinical autonomy and are empowered to lead your service your way to create the career you envision.',
+  vSub:'We’re here to support your success with purpose-built surgery centers and a dedicated specialty infrastructure. You have complete clinical autonomy and are empowered to lead your hospital your way to create the career you envision.',
   who:'surgeons',
   adv:[['Clinical Autonomy','You practice your way. Your surgery protocol, your recovery plan, your patients, your local referral community.'],
-       ['Advanced Technology','Our imaging and technology are the top grade of their kind. We constantly assess new technologies and equipment, so you have the very best available.'],
+       ['Advanced Technology','Our imaging and technology are the top grade of their kind. We are always evaluating emerging technology to support our teams and improve care to patients.'],
        ['Continuous Learning','We nurture a continuous learning culture, even for our tenured surgeons. Along with CE, you’ll participate in mentorship and develop leadership skills.'],
        ['Dedicated Support',SUPPORT],['Large Network of Surgeons',NETWORK],['Fulfilling Careers',FULFIL]],
   cta:'Whether you’re a board-certified veterinary surgeon or interested in a surgical residency, we have opportunities for you. Just click the link below and indicate your area of interest.'},
  {name:'Ophthalmology',heroPh:'Photo: eye exam with cat',caringPh:'Photo: vet with Bengal cat',
   title:'Our Ophthalmology Network is Growing—Join Us',
-  intro:'We’re building the largest network for boarded veterinary ophthalmologists in the nation. At Mission Specialty, we’re dedicated to ensuring the success of our ophthalmologists and their services.',
+  intro:'We’re building the best network for boarded veterinary ophthalmologists in the nation. At Mission Specialty, we’re dedicated to ensuring the success of our ophthalmologists and their teams, and their hospitals.',
   vTitle:'Build Your Success with Mission Specialty',vLabel:'Ophthalmology video',
-  vSub:'Mission Specialty gives you the resources and space to thrive, and more importantly, to create the kind of life you want as an ophthalmologist. That means you have complete clinical autonomy, and you lead your service your way. We’re here to support you as you create a lasting career for years to come.',
+  vSub:'Mission Specialty gives you the resources and space to thrive, and more importantly, to create the kind of life you want as an ophthalmologist. That means you have complete clinical autonomy, and you lead your hospital your way. We’re here to support you as you create a lasting career for years to come.',
   who:'ophthalmologists',
   adv:[['Clinical Autonomy','You practice ophthalmology your way. Your diagnostics, your treatment plan, your patients, your local referral community.'],
-       ['Advanced Technology',TECH],['Continuous Learning',learn('ophthalmologists')],
+       ['Advanced Technology','Our imaging and technology are top-of-the-line. We are always evaluating emerging technology to support our teams and improve care to patients.'],['Continuous Learning',learn('ophthalmologists')],
        ['Dedicated Support',SUPPORT],['Large Ophthalmologist Network',NETWORK],['Fulfilling Careers',FULFIL]],
   cta:'Whether you’re a board-certified veterinary ophthalmologist or interested in an ophthalmology residency, we have opportunities for you. Just click the link below and indicate your area of interest.'},
  {name:'Internal Medicine',heroPh:'Photo: internist examining cat',caringPh:'Photo: vet examining white dog',
   title:'Build a Lasting Career as a Veterinary Internist',
-  intro:'At Mission Specialty, we’re creating a network of boarded veterinary internists that is specialist-focused and backed by resources that allow you to thrive. We know that when veterinary internal medicine teams are supported and happy, they can deliver exceptional patient care.',
+  intro:'At Mission Specialty, we’re creating a network of boarded veterinary internists that is specialist-focused and backed by resources that help you thrive. We know that when veterinary internal medicine teams are supported and happy, they can deliver personalized patient care.',
   vTitle:'Internal Medicine at the Forefront',vLabel:'Internal medicine video',
   vSub:'Many times internal medicine teams are confronted with challenging cases but are hampered by shared diagnostic equipment and hospital protocols that are not built for them. Mission Specialty sees internal medicine differently. We give internists the space and resources needed for complex work. And we put you in the driver’s seat of delivering high-level patient care.',
   who:'internists',
   adv:[['Clinical Autonomy','You practice internal medicine your way. Your diagnostics, your treatment plan, your patients, your local referral community.'],
-       ['Advanced Technology',TECH],['Continuous Learning',learn('internists')],
+       ['Advanced Technology','Our imaging and technology are top-of-the-line. We are always evaluating emerging technology to support our teams and improve care to patients.'],['Continuous Learning',learn('internists')],
        ['Dedicated Support',SUPPORT],['Large Internal Medicine Network',NETWORK],['Fulfilling Careers',FULFIL]],
   cta:'Whether you’re a board-certified veterinary internist or interested in an internal medicine residency, we have opportunities for you. Just click the link below and indicate your area of interest.'},
  {name:'Oncology',heroPh:'Photo: oncologist examining dog',caringPh:'Photo: vet examining cat',
@@ -818,7 +819,7 @@ const PAGES=[
   vSub:'Top-level veterinary oncology requires specialized resources and support. That’s where Mission Specialty comes in. We are specialist-focused and are here to back you in the critical care you provide for your patients.',
   who:'oncologists',
   adv:[['Clinical Autonomy','You practice oncology your way. Your diagnostics, your treatment plan, your patients, your local referral community.'],
-       ['Advanced Technology',TECH],['Continuous Learning',learn('oncologists')],
+       ['Advanced Technology','Our imaging and technology are top-of-the-line. We are always evaluating emerging technology to support our teams and improve care to patients.'],['Continuous Learning',learn('oncologists')],
        ['Dedicated Support',SUPPORT],['Large Oncology Network',NETWORK],['Fulfilling Careers',FULFIL]],
   cta:'Whether you’re a board-certified veterinary oncologist or interested in an oncology residency, we have opportunities for you. Just click the link below and indicate your area of interest.'}
 ];
@@ -857,7 +858,7 @@ $('#specpages').outerHTML=PAGES.map(d=>`
     <div class="wrap caring">
       <div>
         <h2 class="rv">Caring for People<br>Who Care for Pets</h2>
-        <p class="lead rv" style="--d:.06s">We believe that successful hospitals start with the people providing the care. It’s our top priority to provide high-quality benefits, so our specialists can focus on caring for their patients.</p>
+        <p class="lead rv" style="--d:.06s">We believe that successful hospitals start with the people providing the care. That’s why we invest in benefits worthy of their expertise, so they can focus on what matters most: their patients.</p>
         <h4 class="rv">Robust compensation packages include:</h4>
         <ul class="checks rv">${BENEFITS.map(b=>`<li><svg><use href="#check"/></svg>${b}</li>`).join('')}</ul>
       </div>
@@ -868,7 +869,7 @@ $('#specpages').outerHTML=PAGES.map(d=>`
     <div class="wrap">
       <h2 class="rv">Ready to Take the Next Step?</h2>
       <p class="rv" style="--d:.06s">${d.cta}</p>
-      <a class="btn btn-gold rv" style="--d:.12s" href="#contact">Get in Touch</a>
+      <a class="btn btn-gold rv" style="--d:.12s" href="#contact">Explore Opportunities</a>
     </div>
   </section>
 </section>`).join('');
