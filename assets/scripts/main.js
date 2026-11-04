@@ -7,7 +7,7 @@ const SPECS=[
  {n:'Cardiology',d:'The largest cardiology network in the US with over 50 boarded cardiologists practicing in 30+ locations nationwide.',p:'Photo: cardiology exam'},
  {n:'Dental',d:'One of our most rapidly growing networks, with dental specialists across the country. Residency opportunities available!',p:'Photo: dental exam'},
  {n:'Surgery',d:'Surgery centers are actively being built and will be led by board-certified surgery specialists.',p:'Photo: surgery patient'},
- {n:'Ophthalmology',d:'With multiple ophthalmology services across growing metro areas, we are building ophthalmology access nationally.',p:'Photo: eye exam'},
+ {n:'Ophthalmology',d:'With multiple ophthalmology hospitals across growing metro areas, we are building ophthalmology access nationally.',p:'Photo: eye exam'},
  {n:'Oncology',d:'Designed to meet the demand for oncology specialists, our practices offer specialist-led cutting-edge oncologic care.',p:'Photo: oncology care'},
  {n:'Internal Medicine',d:'We are building outpatient internal medicine practices from the ground up to offer increased access for our patients.',p:'Photo: internal medicine'}
 ];
