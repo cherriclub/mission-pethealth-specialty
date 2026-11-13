@@ -176,11 +176,11 @@
         <p class="lead rv" style="--d:.08s">Led by people who have built their careers in veterinary care and specialty medicine, our team is dedicated to growing and supporting the Mission Specialty network.</p>
       </div>
       <div class="leaders">
-        <article class="leader rv"><div class="ph photo"><img src="assets/images/jay-price.webp" alt="Jay Price, DVM" loading="lazy" decoding="async"></div><div><h4>Jay Price, DVM</h4><p class="role">CEO</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p></div></article>
-        <article class="leader rv" style="--d:.08s"><div class="ph photo"><img src="assets/images/jeff-falone.webp" alt="Jeff Falone, DVM" loading="lazy" decoding="async"></div><div><h4>Jeff Falone, DVM</h4><p class="role">Head of Specialty</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p></div></article>
-        <article class="leader rv"><div class="ph photo"><img src="assets/images/trevor-lemis.webp" alt="Trevor Lemis" loading="lazy" decoding="async"></div><div><h4>Trevor Lemis</h4><p class="role">VP of Operations</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p></div></article>
-        <article class="leader rv" style="--d:.08s"><div class="ph photo"><img src="assets/images/bk-mclaughlin.webp" alt="BK McLaughlin" loading="lazy" decoding="async"></div><div><h4>BK McLaughlin</h4><p class="role">VP of Business Development</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p></div></article>
-        <article class="leader rv"><div class="ph photo"><img src="assets/images/jon-fletcher.webp" alt="Jon Fletcher, DVM" loading="lazy" decoding="async"></div><div><h4>Jon Fletcher, DVM, DACVIM, Internal Medicine</h4><p class="role">VP of Medical Operations</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p></div></article>
+        <article class="leader rv"><div class="ph photo"><img src="assets/images/jay-price.webp" alt="Jay Price, DVM" loading="lazy" decoding="async"></div><div><h4>Jay Price, DVM</h4><p class="role">CEO</p><button class="btn btn-line bio-btn" type="button" data-bio="jay" aria-haspopup="dialog">Read full bio</button></div></article>
+        <article class="leader rv" style="--d:.08s"><div class="ph photo"><img src="assets/images/jeff-falone.webp" alt="Jeff Falone, DVM" loading="lazy" decoding="async"></div><div><h4>Jeff Falone, DVM</h4><p class="role">Head of Specialty</p><button class="btn btn-line bio-btn" type="button" data-bio="jeff" aria-haspopup="dialog">Read full bio</button></div></article>
+        <article class="leader rv"><div class="ph photo"><img src="assets/images/trevor-lemis.webp" alt="Trevor Lemis" loading="lazy" decoding="async"></div><div><h4>Trevor Lemis</h4><p class="role">VP of Operations</p><button class="btn btn-line bio-btn" type="button" data-bio="trevor" aria-haspopup="dialog">Read full bio</button></div></article>
+        <article class="leader rv" style="--d:.08s"><div class="ph photo"><img src="assets/images/bk-mclaughlin.webp" alt="BK McLaughlin" loading="lazy" decoding="async"></div><div><h4>BK McLaughlin</h4><p class="role">VP of Business Development</p><button class="btn btn-line bio-btn" type="button" data-bio="bk" aria-haspopup="dialog">Read full bio</button></div></article>
+        <article class="leader rv"><div class="ph photo"><img src="assets/images/jon-fletcher.webp" alt="Jon Fletcher, DVM" loading="lazy" decoding="async"></div><div><h4>Jon Fletcher, DVM, DACVIM, Internal Medicine</h4><p class="role">VP of Medical Operations</p><button class="btn btn-line bio-btn" type="button" data-bio="jon" aria-haspopup="dialog">Read full bio</button></div></article>
       </div>
     </div>
   </section>
@@ -220,7 +220,7 @@
       <div class="inner">
         <div id="formwrap">
           <div class="hero-anim">
-            <h1>Shape the future with Mission Specialty</h1>
+            <h1>Shape the Future With Mission Specialty</h1>
             <div class="intro">
               <p>Whether you’re ready to make a move or planning ahead, we want to get to know you: your specialty, your goals, and what you want from your next role. We’ll look for the opportunity that fits, now or down the road. <strong>Let’s connect.</strong></p>
             </div>
@@ -277,6 +277,14 @@
     <button class="close" id="vclose" aria-label="Close video"><svg><use href="#x"/></svg></button>
     <div><strong id="vtitle">Video</strong>The video will play here once it’s added to the build.</div>
   </div>
+</dialog>
+<dialog id="biodlg" class="bio-dlg" aria-labelledby="bio-name">
+  <div class="bio-head">
+    <div class="bio-photo"><img alt="" src=""></div>
+    <div><p class="bio-eyebrow">Leadership</p><h3 id="bio-name"></h3><p class="bio-role"></p></div>
+    <button class="close bio-close" type="button" aria-label="Close bio"><svg><use href="#x"/></svg></button>
+  </div>
+  <div class="bio-body"></div>
 </dialog>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
