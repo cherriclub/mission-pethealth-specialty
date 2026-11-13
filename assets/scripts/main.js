@@ -76,8 +76,10 @@ const NETWORK='Access a team ready to collaborate and consult on cases, provide 
 const FULFIL='Support to deliver amazing care including robust compensation and benefits, flexible schedule (no nights, weekends, or on-call shifts), leadership opportunities, collaborative culture, and more.';
 const TECH='Our imaging and technology are top-of-the-line. We constantly assess new technologies and equipment, so you have the very best available.';
 const learn=w=>`We nurture a continuous learning culture, even for our tenured ${w}. Along with CE, you’ll serve as an investigator in clinical trials, participate in mentorship, and develop leadership skills.`;
+const CARDIO_IMG={"hero": "assets/images/cardiology-hero.webp", "caring": "assets/images/cardiology-caring.webp"};
+const DENT_IMG={"hero": "assets/images/dentistry-hero.webp", "caring": "assets/images/dentistry-caring.webp"};
 const PAGES=[
- {name:'Cardiology',heroPh:'Photo: cardiologist with Pomeranian',caringPh:'Photo: cardiologist with Pomeranian',
+ {name:'Cardiology',heroPh:'Photo: cardiologist with Pomeranian',caringPh:'Photo: cardiologist with Pomeranian',heroImg:CARDIO_IMG.hero,heroAlt:'CVCA cardiology team reviewing an echocardiogram with a curly-coated dog on the exam table',caringImg:CARDIO_IMG.caring,caringAlt:'CVCA team members kneeling around a smiling golden retriever',
   title:'Join the Leader in Veterinary Cardiology',
   intro:'As the largest, most respected veterinary outpatient cardiology network in the nation, CVCA Cardiac Care for Pets has 30+ locations and 50+ boarded cardiologists, along with one of the most sought-after residency programs in veterinary cardiology.',
   network:true,vTitle:'Inside CVCA',vLabel:'CVCA video',vSub:'Experience a day in the life with CVCA’s leading veterinary cardiologists.',
@@ -88,16 +90,16 @@ const PAGES=[
        ['Continuous Learning','We nurture a continuous learning culture, even for our tenured cardiologists. Along with CE, you’ll serve as an investigator in cutting-edge clinical trials, participate in mentorship, and develop leadership skills to further grow your own team.'],
        ['Dedicated Support',SUPPORT],['Extensive Cardiologist Network',NETWORK],['Fulfilling Careers',FULFIL]],
   cta:'Whether you’re a board-certified specialist or pursuing advanced training, discover opportunities to grow your career and make a meaningful impact in veterinary medicine.'},
- {name:'Dentistry',heroPh:'Photo: dentist examining dog',caringPh:'Photo: vet with white dog',
-  title:'Join Our Growing Veterinary Dental Network',
+ {name:'Dentistry',heroPh:'Photo: dentist examining dog',caringPh:'Photo: vet with white dog',heroImg:DENT_IMG.hero,heroPos:'50% 24%',heroAlt:'Veterinary dentist examining a black dog’s teeth while its owner holds the leash',caringImg:DENT_IMG.caring,caringAlt:'Veterinary dentist gently examining a tabby cat’s mouth as its owner comforts it',
+  title:'Join Our Growing Veterinary Dentistry Network',
   intro:'Build the life you want as a veterinary dentist with Mission Specialty. We offer dentists the support to deliver patient care at the highest standard, along with a fulfilling life on your terms.',
-  vTitle:'A Dental Network Built and Led by Specialty Professionals',vLabel:'Dental video',
-  vSub:'At Mission Specialty, Dental and Oral Surgery is a critical area of focus, not just a service add-on in a large clinic. Our AVDC-boarded doctors work in hospitals built to deliver advanced oral surgery and care, equipped with advanced technology and support staff for dental services.',
+  vTitle:'A Dentistry Network Built and Led by Specialty Professionals',vLabel:'Dental video',
+  vSub:'At Mission Specialty, Dentistry and Oral Surgery is a critical area of focus, not just a service add-on in a large clinic. Our AVDC-boarded doctors work in hospitals built to deliver advanced oral surgery and care, equipped with advanced technology and support staff for dentistry services.',
   who:'dentists and oral surgeons',
   adv:[['Clinical Autonomy','You practice your way. Your diagnostics, your treatment plan, your patients, your local referral community.'],
        ['Advanced Technology','Our imaging and technology are the best of their kind, including cone-beam CT and advanced equipment. We are always evaluating emerging technology to support our teams and improve care to patients.'],
        ['Continuous Learning','We nurture a continuous learning culture, even for our tenured dentists. Along with CE, you’ll participate in mentorship and develop leadership skills to further grow your own team.'],
-       ['Dedicated Support',SUPPORT],['Extensive Dental Specialist Network',NETWORK],['Fulfilling Careers',FULFIL]],
+       ['Dedicated Support',SUPPORT],['Extensive Dentistry Network',NETWORK],['Fulfilling Careers',FULFIL]],
   cta:'Whether you’re a board-certified specialist or pursuing advanced training, discover opportunities to grow your career and make a meaningful impact in veterinary medicine.'},
  {name:'Surgery',heroPh:'Photo: surgeon in the OR',caringPh:'Photo: vet reviewing X-ray with cat',
   title:'Build the Life You Want as a Veterinary Surgeon',
@@ -112,9 +114,9 @@ const PAGES=[
   cta:'Whether you’re a board-certified specialist or pursuing advanced training, discover opportunities to grow your career and make a meaningful impact in veterinary medicine.'},
  {name:'Ophthalmology',heroPh:'Photo: eye exam with cat',caringPh:'Photo: vet with Bengal cat',
   title:'Our Ophthalmology Network is Growing—Join Us',
-  intro:'We’re building the best network for boarded veterinary ophthalmologists in the nation. At Mission Specialty, we’re dedicated to ensuring the success of our ophthalmologists, their teams, and their hospitals.',
+  intro:'We’re building the best network for boarded veterinary ophthalmologists in the nation. At Mission Specialty, we’re dedicated to ensuring the success of our ophthalmologists, their teams, and their specialty centers.',
   vTitle:'Build Your Success with Mission Specialty',vLabel:'Ophthalmology video',
-  vSub:'Mission Specialty gives you the resources and space to thrive, and more importantly, to create the kind of life you want as an ophthalmologist. That means you have complete clinical autonomy, and you lead your hospital your way. We’re here to support you as you create a lasting career for years to come.',
+  vSub:'Mission Specialty gives you the resources and space to thrive, and more importantly, to create the kind of life you want as an ophthalmologist. That means you have complete clinical autonomy, and you lead your specialty center your way. We’re here to support you as you create a lasting career for years to come.',
   who:'ophthalmologists',
   adv:[['Clinical Autonomy','You practice ophthalmology your way. Your diagnostics, your treatment plan, your patients, your local referral community.'],
        ['Advanced Technology','Our imaging and technology are top-of-the-line. We are always evaluating emerging technology to support our teams and improve care to patients.'],['Continuous Learning','We nurture a continuous learning culture, even for our tenured ophthalmologists. Along with CE, you’ll serve as an investigator in clinical trials, participate in mentorship, and develop leadership skills to further grow your own team.'],
@@ -149,9 +151,9 @@ const ICON_ORDER=['autonomy','tech','learn','support','network','careers'];
 const cam='<svg><use href="#cam"/></svg>';
 $('#specpages').outerHTML=PAGES.map(d=>`
 <section data-view="${slug(d.name)}" hidden>
-  <div class="spec-banner">
+  <div class="spec-banner${d.heroImg?' full':''}">
     <div class="lockup hero-anim"><svg><use href="#shield"/></svg><div><div class="n">Mission Specialty</div><div class="s">${d.name.toUpperCase()}</div></div></div>
-    <div class="ph"><span class="ph-label">${cam}${d.heroPh}</span></div>
+    ${d.heroImg?`<div class="ph photo-fill hero-photo"><img src="${d.heroImg}" alt="${d.heroAlt}" decoding="async"${d.heroPos?` style="object-position:${d.heroPos}"`:''}></div>`:`<div class="ph"><span class="ph-label">${cam}${d.heroPh}</span></div>`}
   </div>
   <section class="sec navy">
     <div class="wrap">
@@ -181,11 +183,11 @@ $('#specpages').outerHTML=PAGES.map(d=>`
     <div class="wrap caring">
       <div>
         <h2 class="rv">Caring for People<br>Who Care for Pets</h2>
-        <p class="lead rv" style="--d:.06s">We believe that successful hospitals start with the people providing the care. That’s why we invest in benefits worthy of their expertise, so they can focus on what matters most: their patients.</p>
+        <p class="lead rv" style="--d:.06s">We believe that successful specialty centers start with the people providing the care. That’s why we invest in benefits worthy of their expertise, so they can focus on what matters most: their patients.</p>
         <h4 class="rv">Robust benefits packages include:</h4>
         <ul class="checks rv">${BENEFITS.map(b=>`<li><svg><use href="#check"/></svg><span>${b}</span></li>`).join('')}</ul>
       </div>
-      <div class="ph rv" style="--d:.1s"><span class="ph-label">${cam}${d.caringPh}</span></div>
+      ${d.caringImg?`<div class="ph photo-fill rv" style="--d:.1s"><img src="${d.caringImg}" alt="${d.caringAlt}" loading="lazy" decoding="async"></div>`:`<div class="ph rv" style="--d:.1s"><span class="ph-label">${cam}${d.caringPh}</span></div>`}
     </div>
   </section>
   <section class="sec navy cta">
@@ -259,6 +261,23 @@ const WHERE={"states":[{"name":"Alabama","d":"M648.0,492.4L651.8,491.5L652.9,491
   addEventListener('resize',()=>hide(true));
 })();
 
+/* ---------- Leadership bios ---------- */
+(function(){
+  const BIOS={"jay": ["A native of Phenix City, Alabama, Dr. Jay Price first found his love of animal care while spending summers on his grandparents’ farm. He received his BS in Zoology at Auburn University, Doctorate of Veterinary Medicine from Auburn University College of Veterinary Medicine and served as President of Alpha Psi veterinary medical fraternity.", "In 2014, Dr. Price founded Southern Veterinary Partners, headquartered in Birmingham, Alabama. Prior to forming SVP, Dr. Price owned Oak View Animal Hospital and Patton Chapel Animal Clinic, where his areas of interest included oncology, internal medicine, surgery, and dermatology. His focus these days is leading Mission’s chart-topping growth while prioritizing the autonomy of each hospital.", "Jay enjoys spending time with his wife, two boys and fishing. He has provided his veterinary services to numerous animal rescue and adoption organizations and volunteered as a trail guide on the Appalachian Trail with the Blind Veterans Association.", "He was named “Young Alumni of the Year” from Auburn University College of Veterinary Medicine, a “Top Tiger” from Auburn University, one of the “Top 40 Under 40” and “Executive of Influence” by the Birmingham Business Journal, as well as a finalist for “Entrepreneur of the Year” from Ernst & Young."], "jeff": [], "trevor": ["Trevor Lemis is Vice President of Operations at Mission. He brings more than 15 years of senior leadership experience across veterinary specialty and general practice hospitals. He partners closely with Specialty Operations Directors and Chief Medical Officers to lead operational strategy across the specialty network. His focus areas are scalable growth, operational efficiency, and consistently high standards of patient care.", "Trevor believes that sustainable growth depends on culture. As organizations expand, he works to make sure the values, teamwork, and sense of purpose that define great hospitals grow with them. His approach pairs disciplined, repeatable operating systems with a commitment to empowering medical and support teams. That approach helps each hospital keep its identity while benefiting from the strength of a larger organization. His early career in hospitality shaped his commitment to service excellence, which he brings to both client experience and team engagement.", "A Connecticut native, Trevor spent a decade in Colorado before relocating to St. Augustine, Florida, to join Mission Pet Health in November 2019. He and his wife, Heather, a veterinary technician, have three sons, Dylan, Austin, and Gavin, and two dogs: Sadie, a yellow Labrador, and Harley, a golden retriever. Outside of work, Trevor enjoys boating, fishing, and golfing."], "bk": ["As a Vice President of Business Development at Mission Specialty, BK McLaughlin brings a wealth of experience and passion for the animal health industry. After graduating from Central Connecticut State University in 2007 with a degree in marketing, he discovered a deep love for the field.", "BK’s journey in the industry began with Securos veterinary orthopedics, where he gained valuable insights into the world of veterinary care. He then moved on to Nutramax labs and MWI animal health, further expanding his knowledge and expertise.", "In 2018, he joined Southern Veterinary Partners, a role that has allowed him to combine his business acumen with his passion for helping others. He takes great joy in assisting owners in finding an exit strategy and ultimately realizing their dreams of retirement.", "With a relentless drive for success and a deep understanding of the animal health industry, BK is dedicated to fostering growth and creating opportunities for both our business and our clients. He is proud to be a part of the Mission Pet Health team and looks forward to continuing to make a positive impact in the field."], "jon": ["Dr. Jon Fletcher is a small animal internist and Vice President of Medical Operations. He has over 20 years of specialty experience with time spent in clinical practice, academia, and leadership.", "As the VP of Medical Operations, Jon supports veterinary specialists across the organization and plays a pivotal role in shaping and sustaining specialty services, developing and supporting operational excellence, building and supporting residency programs, and facilitating clinical research. He is a trusted medical partner to our specialists and hospital teams and works collaboratively to drive quality care, innovation, and organizational growth.", "Jon is a Louisiana native and attended LSU for undergraduate studies, veterinary school, and residency. He resides in Baton Rouge with his wife and four children."]};
+  const dlg=document.getElementById('biodlg'); if(!dlg) return;
+  const esc=t=>t.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  document.querySelectorAll('.bio-btn').forEach(b=>b.addEventListener('click',()=>{
+    const card=b.closest('.leader'),img=card.querySelector('img'),paras=BIOS[b.dataset.bio]||[];
+    dlg.querySelector('#bio-name').textContent=card.querySelector('h4').textContent;
+    dlg.querySelector('.bio-role').textContent=card.querySelector('.role').textContent;
+    const pi=dlg.querySelector('.bio-photo img'); pi.src=img?img.src:''; pi.alt=img?img.alt:'';
+    dlg.querySelector('.bio-body').innerHTML=paras.length?paras.map(p=>'<p>'+esc(p)+'</p>').join(''):'<p class="soon">Full bio coming soon.</p>';
+    dlg.querySelector('.bio-body').scrollTop=0;
+    dlg.showModal();
+  }));
+  dlg.querySelector('.bio-close').addEventListener('click',()=>dlg.close());
+  dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
+})();
 /* ---------- Reveal + count-up ---------- */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.12});
 $$('.rv').forEach(el=>io.observe(el));
